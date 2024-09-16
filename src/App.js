@@ -5,6 +5,9 @@ import { Container } from "react-bootstrap";
 import { Toaster } from "react-hot-toast";
 import RequireAuth from "./context/RequireAuth"; // Ensure correct path
 import Header from "./component/Header";
+// import LocomotiveScroll from "locomotive-scroll";
+
+// const locomotiveScroll = new LocomotiveScroll();
 // Lazy loading components for optimization
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
@@ -14,15 +17,12 @@ const ForgotPassword = lazy(() => import("../src/component/ForgotPassword"));
 // App component for layout and context provider
 function App() {
   const { currentUser } = useAuth();
-  console.log(currentUser);
 
   return (
     <AuthProvider>
-      <Container>
-        {currentUser ? <Header /> : null}
-        <Outlet />
-        <Toaster />
-      </Container>
+      {currentUser ? <Header /> : null}
+      <Outlet />
+      <Toaster />
     </AuthProvider>
   );
 }
@@ -36,7 +36,7 @@ export const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Navigate to="/signup" />, // Redirect root path to sign-up
+        element: <Navigate to="/signup" />,
       },
       {
         path: "/signup",

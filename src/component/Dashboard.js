@@ -27,7 +27,7 @@ export default function Dashboard() {
       <div>
         {/* Hotels Section */}
         <div
-          className="d-flex flex-wrap justify-content-center mt-4"
+          className="d-flex flex-wrap justify-content-center mt-4 px-28"
           style={{ gap: "20px" }} // Add space between items
         >
           {hotel.length > 0 ? (
