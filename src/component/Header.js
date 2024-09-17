@@ -128,27 +128,13 @@ export default function Header() {
                     >
                       {item.code}, {item.name}
                     </li>
+                    <Divider/>
                   </div>
                 ))
               ) : (
                 <li className="text-white">Search Your Country Name</li>
               )}
             </ul>
-
-            {/*searchResult.map((data, index) => (
-          <li
-            onClick={() => fetchLangAndLong(data.place_id)}
-            className="my-6 cursor-pointer hover:text-orange-500 transition-all delay-100 dark:text-white"
-            key={index}
-          >
-            <i className="fa-solid fa-location-dot mr-2 dark:text-white"></i>
-            {data.structured_formatting.main_text}{" "}
-            <p className="text-sm opacity-60 dark:text-white mb-3">
-              {data.structured_formatting.secondary_text}
-            </p>
-            <Divider />
-          </li>
-        ))*/}
           </div>
         </Sidebar>
       </div>
@@ -176,12 +162,10 @@ export default function Header() {
             >
               {searchText ? (
                 <p className="font-bold border-b-2 dark:border-white dark:text-white hover:text-[#ED3237] transition-all delay-100 ease-in-out whitespace-nowrap w-[110px] overflow-hidden text-ellipsis text-center">
-                 {country.name}
+                  {country.name}
                 </p>
               ) : (
-                <p className="font-bold border-b-2 dark:border-white dark:text-white hover:text-[#ED3237] transition-all delay-100 ease-in-out whitespace-nowrap w-[110px] overflow-hidden text-ellipsis text-center">
-                  United States America
-                </p>
+                ""
               )}
               <i className="fa-solid fa-angle-down mb-2 text-lg dark:text-white"></i>
             </div>
