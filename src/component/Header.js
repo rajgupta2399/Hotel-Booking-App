@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -25,56 +25,136 @@ import {
 } from "@heroicons/react/20/solid";
 import ResponsiveAppBar from "./Avatar";
 import { Link } from "react-router-dom";
-
-const products = [
-  {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
-  },
-];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
-];
+import { Sidebar } from "primereact/sidebar";
+import CloseIcon from "@mui/icons-material/Close";
+import { Divider } from "@mui/material";
+import { options } from "../utils/Constant";
+import { CountryCoordinates } from "../context/ContextApi";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [countryCode, setCountryCode] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // State for storing the search input
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [searchText, setSearchText] = useState([]);
+  const { country, setCountry } = useContext(CountryCoordinates);
 
   const styleCard = {
     fontFamily: "Poppins",
   };
 
+  const fetchCountryCode = async () => {
+    const res = await fetch(
+      "https://api.liteapi.travel/v3.0/data/countries?timeout=4",
+      options
+    );
+    const data = await res.json();
+    console.log(data.data);
+    setCountryCode(data.data);
+  };
+
+  useEffect(() => {
+    fetchCountryCode();
+  }, []);
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    console.log("rendering");
+
+    const searchValue = e.target.value.toLowerCase();
+    setSearchTerm(searchValue);
+
+    const filtered = countryCode.filter(
+      (country) =>
+        country.name.toLowerCase().includes(searchValue) ||
+        country.code.toLowerCase().includes(searchValue)
+    );
+
+    setFilteredCountries(filtered);
+  };
+
+  const handleCountryName = (item) => {
+    console.log(item);
+    setSearchText(item);
+    setCountry({
+      code: item.code,
+      name: item.name,
+    });
+    setVisible(false);
+  };
+
   return (
-    <>
+    <div>
+      <div>
+        <Sidebar
+          visible={visible}
+          onHide={() => setVisible(false)}
+          className="sm:w-full w-[90%] md:w-[60%] lg:w-[37%] bg-[#1D232A]"
+        >
+          <div className=" px-10 flex justify-between align-items-center">
+            <h3 className="my-2 text-white text-md font-semibold">
+              Search Area & Streets
+            </h3>
+            <div>
+              <button
+                className="text-white text-xl"
+                onClick={() => setVisible(false)}
+              >
+                <CloseIcon />
+              </button>
+            </div>
+          </div>
+          <div className=" px-10 pt-4 flex justify-center align-middle">
+            <input
+              type="email"
+              placeholder="Search For Area"
+              className="w-full outline-none lg:w-[1/2] focus:outline-none text-black block placeholder-black h-10 rounded-md placeholder:text-center  "
+              name="input"
+              id="input"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+          <div className="flex justify-center align-middle my-5 mx-4">
+            <ul>
+              {filteredCountries.length > 0 ? (
+                filteredCountries.map((item, index) => (
+                  <div className="flex" key={index}>
+                    <i className="fa-solid fa-location-dot mr-2 text-white"></i>
+                    <li
+                      className="my-6 cursor-pointer hover:text-red-600 transition-all delay-100 text-white"
+                      onClick={() => handleCountryName(item)}
+                    >
+                      {item.code}, {item.name}
+                    </li>
+                  </div>
+                ))
+              ) : (
+                <li className="text-white">Search Your Country Name</li>
+              )}
+            </ul>
+
+            {/*searchResult.map((data, index) => (
+          <li
+            onClick={() => fetchLangAndLong(data.place_id)}
+            className="my-6 cursor-pointer hover:text-orange-500 transition-all delay-100 dark:text-white"
+            key={index}
+          >
+            <i className="fa-solid fa-location-dot mr-2 dark:text-white"></i>
+            {data.structured_formatting.main_text}{" "}
+            <p className="text-sm opacity-60 dark:text-white mb-3">
+              {data.structured_formatting.secondary_text}
+            </p>
+            <Divider />
+          </li>
+        ))*/}
+          </div>
+        </Sidebar>
+      </div>
+
       <header
-        className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-lg text-white"
+        className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px]"
         style={styleCard}
       >
         <nav
@@ -86,20 +166,24 @@ export default function Header() {
               <img
                 alt=""
                 src="https://pngimagesfree.com/wp-content/uploads/Make-My-Trip-Logo-PNG@.png"
-                className=" h-10 w-auto"
+                className=" h-9 w-auto"
               />
             </a>
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer py-1"
               onClick={() => setVisible(true)}
               styleCard={styleCard}
             >
-              <p
-                className="font-bold border-b-2 dark:border-white dark:text-white hover:text-orange-500 transition-all delay-100 ease-in-out whitespace-nowrap w-[100px] overflow-hidden text-ellipsis text-center"
-              >
-                USA
-              </p>
-              <i className="fa-solid fa-angle-down mt- text-lg dark:text-white"></i>
+              {searchText ? (
+                <p className="font-bold border-b-2 dark:border-white dark:text-white hover:text-[#ED3237] transition-all delay-100 ease-in-out whitespace-nowrap w-[110px] overflow-hidden text-ellipsis text-center">
+                 {country.name}
+                </p>
+              ) : (
+                <p className="font-bold border-b-2 dark:border-white dark:text-white hover:text-[#ED3237] transition-all delay-100 ease-in-out whitespace-nowrap w-[110px] overflow-hidden text-ellipsis text-center">
+                  United States America
+                </p>
+              )}
+              <i className="fa-solid fa-angle-down mb-2 text-lg dark:text-white"></i>
             </div>
           </div>
           <div className="flex lg:hidden">
@@ -112,39 +196,36 @@ export default function Header() {
               <Bars3Icon aria-hidden="true" className="h-6 w-6" />
             </button>
           </div>
-          <PopoverGroup className="hidden lg:flex lg:gap-x-12 ml-24 text-white">
+          <PopoverGroup className="hidden lg:flex lg:gap-x-12 ml-20 text-white pb-3.5">
             <Popover className="relative">
-              <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
+              <PopoverButton className="flex items-center gap-x-1 text-md font-semibold leading-0 text-white">
                 Product
               </PopoverButton>
             </Popover>
 
             <Link
               to="/search"
-              className="text-sm font-semibold leading-6 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer "
+              className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
               style={styleCard}
             >
-              <i className="fa-solid fa-magnifying-glass px-2"></i>
+              <i className="fa-solid fa-magnifying-glass px-2 no-underline	"></i>
               Search
             </Link>
             <a
               href="#"
-              className="text-sm font-semibold leading-6 text-white"
+              className="text-md font-semibold leading-0 text-white no-underline	"
             >
               Marketplace
             </a>
             <a
               href="#"
-              className="text-sm font-semibold leading-6 text-white"
+              className="text-md font-semibold leading-0 text-white no-underline	"
             >
               Company
             </a>
           </PopoverGroup>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-white"
-            >
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end pb-1">
+            <a href="#" className="font-semibold leading-0 text-white">
               <ResponsiveAppBar />
             </a>
           </div>
@@ -177,26 +258,19 @@ export default function Header() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  <Disclosure as="div" className="-mx-3">
-                    <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                      Product
-                      <ChevronDownIcon
-                        aria-hidden="true"
-                        className="h-5 w-5 flex-none group-data-[open]:rotate-180"
-                      />
-                    </DisclosureButton>
-                    <DisclosurePanel className="mt-2 space-y-2">
-                      {[...products, ...callsToAction].map((item) => (
-                        <DisclosureButton
-                          key={item.name}
-                          as="a"
-                          href={item.href}
-                          className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  <Disclosure as="div" className="-mx-3" style={styleCard}>
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button
+                          className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          style={styleCard}
                         >
-                          {item.name}
-                        </DisclosureButton>
-                      ))}
-                    </DisclosurePanel>
+                          <Link to="/" onClick={() => {}}>
+                            Home
+                          </Link>
+                        </Disclosure.Button>
+                      </>
+                    )}
                   </Disclosure>
                   <a
                     href="#"
@@ -230,6 +304,6 @@ export default function Header() {
           </DialogPanel>
         </Dialog>
       </header>
-    </>
+    </div>
   );
 }
