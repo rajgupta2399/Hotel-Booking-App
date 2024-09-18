@@ -32,7 +32,7 @@ const HotelCard = ({ item }) => {
     <div>
       <div>
         <div className="mb-5 flex flex-wrap flex-row">
-          <div className="py-2 w-[390px] bg-[#292f35] cursor-pointer border-4 border-white rounded-md h-[470px]">
+          <div className="py-2 w-[390px] bg-[#292f35] cursor-pointer border-4 border-white rounded-md h-[455px]">
             <div className="overflow-visible py-4 rounded-lg">
               <img
                 alt={name}

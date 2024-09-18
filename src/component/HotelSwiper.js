@@ -12,6 +12,8 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
 import HotelCard from "./HotelCard";
+import HotelByCity from "./HotelByCity";
+import Divider from "@mui/material/Divider";
 
 export default function HotelSwiper() {
   useCountryCodeHotel();
@@ -38,7 +40,7 @@ export default function HotelSwiper() {
             {Country && Country.length > 0 ? (
               Country.slice(0, 15).map((item, index) => (
                 <SwiperSlide>
-                  <div key={item.id || index}>
+                  <div key={item.id || index} className=" shadow-md">
                     <HotelCard item={item} />
                   </div>
                 </SwiperSlide>
@@ -49,6 +51,7 @@ export default function HotelSwiper() {
           </Swiper>
         </div>
       </div>
+
       {/**
                
       <div className="px-24">

@@ -14,6 +14,7 @@ import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
 import HotelCard from "./HotelCard";
 import HotelSwiper from "./HotelSwiper";
 import { Divider } from "@mui/material";
+import HotelByCity from "./HotelByCity";
 
 export default function Dashboard() {
   useCountryCodeHotel();
@@ -22,15 +23,18 @@ export default function Dashboard() {
 
   return (
     <>
-      <div>
+      <div className=" bg-[#1D232A]">
         <div className=" mt-3">
           <h5 className=" text-white px-24 font-semibold text-md py-3">
             Here Are Some Top Rated Hotels In {country.name}
           </h5>
-          
         </div>
         <HotelSwiper />
-        <Divider/>
+        <Divider />
+
+        <div>
+          <HotelByCity />
+        </div>
       </div>
       {/**
                
