@@ -26,6 +26,7 @@ export default function Dashboard() {
           <h5 className=" text-white px-24 font-semibold text-md py-3">
             Here Are Some Top Rated Hotels In {country.name}
           </h5>
+          
         </div>
         <HotelSwiper />
       </div>
