@@ -22,7 +22,6 @@ const HotelCard = ({ item }) => {
     hotelDescription,
   } = item;
 
-  console.log(item);
   
   
 

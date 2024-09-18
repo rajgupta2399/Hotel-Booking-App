@@ -15,9 +15,11 @@ import HotelCard from "./HotelCard";
 import HotelSwiper from "./HotelSwiper";
 import { Divider } from "@mui/material";
 import HotelByCity from "./HotelByCity";
+import useCityHotel from "../Hooks/useCityHotel";
 
 export default function Dashboard() {
   useCountryCodeHotel();
+  useCityHotel();
   const Country = useSelector((store) => store.country.CountryHotelCode);
   const { country, setCountry } = useContext(CountryCoordinates);
 
@@ -30,7 +32,9 @@ export default function Dashboard() {
           </h5>
         </div>
         <HotelSwiper />
-        <Divider />
+        <div className=" px-24">
+          <Divider className=" bg-white" />
+        </div>
 
         <div>
           <HotelByCity />

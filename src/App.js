@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import RequireAuth from "./context/RequireAuth"; // Ensure correct path
 import Header from "./component/Header";
 import { useState } from "react";
-import { CountryCoordinates } from "../src/context/ContextApi";
+import { CityCoordinates, CountryCoordinates } from "../src/context/ContextApi";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
@@ -17,18 +17,20 @@ const ForgotPassword = lazy(() => import("../src/component/ForgotPassword"));
 function App() {
   const { currentUser } = useAuth();
   const [country, setCountry] = useState({ code: "CH", name: "Switzerland" });
-
+  const [city, setCity] = useState({ city: "Zürich" });
   return (
     <div className="bg-[#1d232a]">
-        <Provider store={store}>
-          <CountryCoordinates.Provider value={{ country, setCountry }}>
+      <Provider store={store}>
+        <CountryCoordinates.Provider value={{ country, setCountry }}>
+          <CityCoordinates.Provider value={{ city, setCity }}>
             <AuthProvider>
               {currentUser ? <Header /> : null}
               <Outlet />
               <Toaster />
             </AuthProvider>
-          </CountryCoordinates.Provider>
-        </Provider>
+          </CityCoordinates.Provider>
+        </CountryCoordinates.Provider>
+      </Provider>
     </div>
   );
 }
