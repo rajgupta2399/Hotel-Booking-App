@@ -9,6 +9,7 @@ import { useState } from "react";
 import { CountryCoordinates } from "../src/context/ContextApi";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
+import { ChakraBaseProvider } from "@chakra-ui/react";
 // import LocomotiveScroll from "locomotive-scroll";
 
 // const locomotiveScroll = new LocomotiveScroll();
@@ -25,15 +26,15 @@ function App() {
 
   return (
     <div className="bg-[#1d232a]">
-      <Provider store={store}>
-        <CountryCoordinates.Provider value={{ country, setCountry }}>
-          <AuthProvider>
-            {currentUser ? <Header /> : null}
-            <Outlet />
-            <Toaster />
-          </AuthProvider>
-        </CountryCoordinates.Provider>
-      </Provider>
+        <Provider store={store}>
+          <CountryCoordinates.Provider value={{ country, setCountry }}>
+            <AuthProvider>
+              {currentUser ? <Header /> : null}
+              <Outlet />
+              <Toaster />
+            </AuthProvider>
+          </CountryCoordinates.Provider>
+        </Provider>
     </div>
   );
 }

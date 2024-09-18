@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import '../App.css'
 import {
   Dialog,
   DialogPanel,
@@ -27,15 +28,15 @@ import ResponsiveAppBar from "./Avatar";
 import { Link } from "react-router-dom";
 import { Sidebar } from "primereact/sidebar";
 import CloseIcon from "@mui/icons-material/Close";
-import { Divider } from "@mui/material";
 import { options } from "../utils/Constant";
 import { CountryCoordinates } from "../context/ContextApi";
+import Divider from "@mui/material/Divider";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [countryCode, setCountryCode] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // State for storing the search input
+  const [searchTerm, setSearchTerm] = useState(""); 
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [searchText, setSearchText] = useState([]);
   const { country, setCountry } = useContext(CountryCoordinates);
@@ -50,7 +51,6 @@ export default function Header() {
       options
     );
     const data = await res.json();
-    console.log(data.data);
     setCountryCode(data.data);
   };
 
@@ -60,8 +60,6 @@ export default function Header() {
 
   // Handle search input change
   const handleSearchChange = (e) => {
-    console.log("rendering");
-
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
@@ -75,8 +73,8 @@ export default function Header() {
   };
 
   const handleCountryName = (item) => {
-    console.log(item);
     setSearchText(item);
+    setSearchTerm("")
     setCountry({
       code: item.code,
       name: item.name,
@@ -86,16 +84,16 @@ export default function Header() {
 
   return (
     <div>
-      <div>
+      <div className={`fixed inset-0 bg-[#1D232A] bg-opacity-5 backdrop-blur-sm z-[999] ${visible ? '' : 'hidden'}`}>
         <Sidebar
           visible={visible}
           onHide={() => setVisible(false)}
           className="sm:w-full w-[90%] md:w-[60%] lg:w-[37%] bg-[#1D232A]"
         >
-          <div className=" px-10 flex justify-between align-items-center">
-            <h3 className="my-2 text-white text-md font-semibold">
-              Search Area & Streets
-            </h3>
+          <div className=" px-10 flex justify-between align-items-center mt-2">
+            <h6 className="my-2 text-white text-md font-semibold">
+              Search Your Country For Booking
+            </h6>
             <div>
               <button
                 className="text-white text-xl"
@@ -108,7 +106,7 @@ export default function Header() {
           <div className=" px-10 pt-4 flex justify-center align-middle">
             <input
               type="email"
-              placeholder="Search For Area"
+              placeholder="Search Your Country"
               className="w-full outline-none lg:w-[1/2] focus:outline-none text-black block placeholder-black h-10 rounded-md placeholder:text-center  "
               name="input"
               id="input"
@@ -117,22 +115,25 @@ export default function Header() {
             />
           </div>
           <div className="flex justify-center align-middle my-5 mx-4">
-            <ul>
+            <ul className="max-h-[65vh] overflow-y-scroll scrollbar-hide">
               {filteredCountries.length > 0 ? (
                 filteredCountries.map((item, index) => (
                   <div className="flex" key={index}>
-                    <i className="fa-solid fa-location-dot mr-2 text-white"></i>
-                    <li
-                      className="my-6 cursor-pointer hover:text-red-600 transition-all delay-100 text-white"
-                      onClick={() => handleCountryName(item)}
-                    >
-                      {item.code}, {item.name}
-                    </li>
-                    <Divider/>
+                    <div>
+                      <i className="fa-solid fa-location-dot mr-2 mt-[20px] text-white text-lg"></i>
+                    </div>
+                    <div>
+                      <li
+                        className="my-6 cursor-pointer hover:text-red-600 transition-all delay-100 text-white"
+                        onClick={() => handleCountryName(item)}
+                      >
+                        {item.code}, {item.name}
+                      </li>
+                    </div>
                   </div>
                 ))
               ) : (
-                <li className="text-white">Search Your Country Name</li>
+                ""
               )}
             </ul>
           </div>
