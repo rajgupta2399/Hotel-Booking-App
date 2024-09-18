@@ -64,7 +64,7 @@ const HotelCard = ({ item }) => {
               <p className=" text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden w-[240px] text-white">
                 {rating} Rating
               </p>
-              <p className=" text-[15px] text-white">{address}{"-"}{zip}</p>
+              <p className=" text-[15px] text-white font-semibold">{address}{"-"}{zip}</p>
 
             </div>
           </div>

@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
 import HotelCard from "./HotelCard";
 import HotelSwiper from "./HotelSwiper";
+import { Divider } from "@mui/material";
 
 export default function Dashboard() {
   useCountryCodeHotel();
@@ -29,6 +30,7 @@ export default function Dashboard() {
           
         </div>
         <HotelSwiper />
+        <Divider/>
       </div>
       {/**
                
