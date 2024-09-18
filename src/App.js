@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
-import { Container } from "react-bootstrap";
 import { Toaster } from "react-hot-toast";
 import RequireAuth from "./context/RequireAuth"; // Ensure correct path
 import Header from "./component/Header";
@@ -9,11 +8,6 @@ import { useState } from "react";
 import { CountryCoordinates } from "../src/context/ContextApi";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
-import { ChakraBaseProvider } from "@chakra-ui/react";
-// import LocomotiveScroll from "locomotive-scroll";
-
-// const locomotiveScroll = new LocomotiveScroll();
-// Lazy loading components for optimization
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
 const Login = lazy(() => import("../src/component/Login"));

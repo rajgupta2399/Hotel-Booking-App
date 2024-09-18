@@ -12,22 +12,42 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
 import HotelCard from "./HotelCard";
-import HotelSwiper from "./HotelSwiper";
 
-export default function Dashboard() {
+export default function HotelSwiper() {
   useCountryCodeHotel();
   const Country = useSelector((store) => store.country.CountryHotelCode);
-  const { country, setCountry } = useContext(CountryCoordinates);
 
   return (
     <>
-      <div>
-        <div className=" mt-3">
-          <h5 className=" text-white px-24 font-semibold text-md py-3">
-            Here Are Some Top Rated Hotels In {country.name}
-          </h5>
+      <div className="px-24">
+        <div>
+          <Swiper
+            className=""
+            spaceBetween={50}
+            slidesPerView={3}
+            cssMode={true}
+            // pagination={true}
+            mousewheel={true}
+            keyboard={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Navigation, Keyboard]}
+          >
+            {Country && Country.length > 0 ? (
+              Country.slice(0, 15).map((item, index) => (
+                <SwiperSlide>
+                  <div key={item.id || index}>
+                    <HotelCard item={item} />
+                  </div>
+                </SwiperSlide>
+              ))
+            ) : (
+              <p>No hotels available.</p>
+            )}
+          </Swiper>
         </div>
-        <HotelSwiper />
       </div>
       {/**
                

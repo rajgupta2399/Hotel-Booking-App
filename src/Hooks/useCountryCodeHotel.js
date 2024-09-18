@@ -8,7 +8,7 @@ import store from "../store/store";
 const useCountryCodeHotel = () => {
   const { country } = useContext(CountryCoordinates);
   const code = country.code;
-  const Country = useSelector((store) => store.country.CountryHotelCode);
+  // const Country = useSelector((store) => store.country.CountryHotelCode);
 
   const dispatch = useDispatch();
   const fetchCountryHotel = async () => {
@@ -21,7 +21,7 @@ const useCountryCodeHotel = () => {
   };
 
   useEffect(() => {
-    !Country && fetchCountryHotel();
+    fetchCountryHotel();
   }, [country]);
 };
 
