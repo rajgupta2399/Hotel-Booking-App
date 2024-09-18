@@ -1,75 +1,98 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useCityHotel from "../Hooks/useCityHotel";
+import { Divider } from "@mui/material";
+import { CityCoordinates } from "../context/ContextApi";
 
 const HotelByCity = () => {
+  const { city, setCity } = useContext(CityCoordinates);
   const { cityCode } = useCityHotel();
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchText, setSearchText] = useState([]);
   const [filteredCity, setFilteredCity] = useState([]);
-  const CityCode = cityCode;
+  const [selectedCity, setSelectedCity] = useState(null);
 
+  const CityCode = cityCode;
+  console.log(CityCode);
+
+  // Handle search input change
   const handleSearchChange = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
-    // Only filter if CityCode is an array
-    if (Array.isArray(CityCode)) {
-      const filtered = CityCode.filter((city) =>
-        city.city.toLowerCase().includes(searchValue)
-      );
-      setFilteredCity(filtered);
-    }
+    const filtered = CityCode.filter((city) =>
+      city.city.toLowerCase().includes(searchValue)
+    );
+    setFilteredCity(filtered);
+  };
+
+  // Handle city selection
+  const handleCitySelect = (city) => {
+    setSearchTerm(city);
+    setFilteredCity([]);
+    setSelectedCity(city);
+    setCity(city);
   };
 
   return (
     <>
-      <div className=" mt-5">
-        <h6 className=" text-lg capitalize font-semibold text-white text-center">
+      <div className="mt-5">
+        <h6 className="text-lg capitalize font-semibold text-white text-center">
           Search Your Hotel By entering the city name
         </h6>
         <div className="flex justify-center align-middle my-8 gap-5">
-          <input
-            type="text"
-            placeholder="      Enter Your City To Book Hotels"
-            className="outline-none w-1/2 focus:outline-none text-black block rounded-md"
-            name="input"
-            id="input"
-            onChange={handleSearchChange}
-          />
-          <button className="border-2 border-[#ED3237] py-2.5 px-10 bg-[#ED3237] rounded-lg text-white ">
-            Search
-          </button>
-        </div>
+          <div className="relative w-1/2">
+            <input
+              type="text"
+              placeholder="     Enter Your City To Book Hotels"
+              className="outline-none w-full focus:outline-none text-black block rounded-md h-[50px] text-center"
+              value={searchTerm}
+              onChange={handleSearchChange} // Update on input change
+            />
 
-        <div className="flex justify-center align-middle my-5 mx-4">
-          <ul className="max-h-[65vh] overflow-y-scroll scrollbar-hide">
-            {filteredCity.length > 0
-              ? filteredCity.map((item, index) => (
-                  <div className="flex" key={index}>
-                    <div>
-                      <i className="fa-solid fa-location-dot mr-2 mt-[20px] text-white text-lg"></i>
-                    </div>
-                    <div>
-                      <li
-                        className="my-6 cursor-pointer hover:text-red-600 transition-all delay-100 text-white"
-                        onClick={() => {}}
-                      >
-                        {item.city}
-                      </li>
-                    </div>
+            {/* City list dropdown below input */}
+            {filteredCity.length > 0 && (
+              <ul className="absolute z-10 w-full bg-[#1D232A] border border-gray-300 rounded-md max-h-60 overflow-y-auto scrollbar-hide">
+                {filteredCity.map((item, index) => (
+                  <div key={index}>
+                    <li
+                      key={index}
+                      className="p-2 cursor-pointer text-white"
+                      onClick={() => handleCitySelect(item.city)}
+                    >
+                      {item.city}
+                    </li>
+                    <Divider className="bg-white mb-2 mt-2" />
                   </div>
-                ))
-              : ""}
-          </ul>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
 
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
-          nesciunt. Vero corrupti voluptas id ex voluptatum fugit eveniet
-          reprehenderit minima. Odio enim rerum error molestias vitae similique
-          maiores beatae sit!
-        </p>
+        {/* Display selected city */}
+        {selectedCity && (
+          <div className="text-white text-center mt-4">
+            Selected City: {selectedCity}
+          </div>
+        )}
       </div>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ad
+        alias facere, porro nostrum voluptate itaque harum architecto soluta
+        sapiente iusto expedita quos aspernatur veritatis ea ex doloribus
+        molestiae nam fugit rerum sint molestias. Magni recusandae laboriosam
+        quod, asperiores illum distinctio culpa voluptatibus, adipisci aut
+        eligendi quidem! Ab pariatur nisi iure velit repellendus, distinctio
+        facereequuntur facilis! Totam possimus illo consequatur maxime vel,
+        eligendi excepturi praesentium dolore et numquam nostrum iste alias
+        itaque vitae harum soluta accusamus, enim dolor molestiae quasi
+        officiis! Nostrum laudantium sequi ab dolorem reiciendis exercitationem
+        assumenda architecto repudiandae totam eveniet repellat excepturi, ea
+        perferendis eaque similique ipsa! Repudiandae eaque rem nulla nisi!
+        Consequuntur labore beatae nam ad iusto dicta reprehenderit voluptas
+        quae perspiciatis explicabo porro, molestiae animi. Iste maxime odit
+        vel?
+      </p>
     </>
   );
 };

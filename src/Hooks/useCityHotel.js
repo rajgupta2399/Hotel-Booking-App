@@ -12,8 +12,7 @@ const useCityHotel = () => {
       options
     );
     const data = await res.json();
-    
-    setCityCode(data);
+    setCityCode(data.data);
   };
 
   useEffect(() => {
