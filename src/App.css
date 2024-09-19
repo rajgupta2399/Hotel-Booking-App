@@ -12,3 +12,10 @@
 .shadow-custom {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+}

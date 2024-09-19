@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { CountryCoordinates } from "../context/ContextApi";
 import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
-
+import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 const MainHotelCard = ({ item }) => {
   const { country, setCountry } = useContext(CountryCoordinates);
   const {
@@ -22,49 +21,104 @@ const MainHotelCard = ({ item }) => {
     hotelDescription,
   } = item;
 
-  
-  
-
   //   const country = useSelector((store) => store.country.CountryHotelCode);
-  //   console.log(country);
+  // console.log(item);
+  const strongTagText =
+    hotelDescription
+      .match(/<strong>(.*?)<\/strong>/g)
+      ?.map((tag) => tag.replace(/<\/?strong>/g, "")) || [];
   return (
     <div>
       <div>
         <div className="mb-5 flex flex-col">
-          <div className="py-2 w-[100%] bg-[#292f35] cursor-pointer border-4 border-white rounded-md h-[455px]">
-            <div className="overflow-visible py-4 rounded-lg">
-              <img
-                alt={name}
-                className="px-4 h-[200px] rounded-lg object-cover"
-                src={
-                    main_photo ? main_photo : "https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D"
-                }
-                width="100%"
-              />
-            </div>
-            <div className="px-4 flex-col">
-              <p className="text-[20px] capitalize font-semibold text-ellipsis whitespace-nowrap overflow-hidden w-[250px] text-white pt-2">
-                {name}
-              </p>
-
-              <div className="flex flex-row gap-5">
-                <div className="flex flex-row ">
-                  <p className=" text-[15px] capitalize text-white font-semibold">
-                    {country.name}, {city}
+          <div className=" py-10 w-[100%] bg-[#14181B] cursor-pointer border-4 border-white rounded-md h-[455px] px-4">
+            <div className="hotelImgBox px-2 flex flex-row gap-4">
+              <div className="image">
+                <img
+                  src={
+                    main_photo
+                      ? main_photo
+                      : "https://images.unsplash.com/photo-1723465308831-29da05e011f3?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                  alt={name}
+                  className=" object-cover rounded-md  w-[350px] h-[260px]"
+                />
+              </div>
+              <div className="hotelTextBox">
+                <div className="imagebox py-2">
+                  <img
+                    src="https://promos.makemytrip.com/Hotels_product/Value_Stays/v2/logo/ValueStays-3.png"
+                    alt=""
+                    className=" w-[150px]"
+                  />
+                </div>
+                <div className="text flex gap-2">
+                  <p className="text-[19px] capitalize font-semibold text-ellipsis whitespace-nowrap overflow-hidden text-white">
+                    {name}
+                  </p>
+                  <p className="text-[14px] capitalize font-semibold text-white">
+                    <Rating name="size-small" defaultValue={stars} readOnly />
                   </p>
                 </div>
-                <div>
-                  <p className="text-[14px] capitalize font-semibold text-white">
-                    <Rating name="size-medium" defaultValue={stars} />
+                <div className="text">
+                  <p className=" text-[15px] text-[#0077b6] font-semibold mt-[-10px]">
+                    {address} {city}
+                    {"-"}
+                    {zip}
                   </p>
+                  <div className="rating">
+                    <p className=" text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden  text-yellow-200 mt-[-7px]">
+                      {rating} ({reviewCount}) ReviewCount
+                    </p>
+                  </div>
+                </div>
+                <div className="hotelStrongText text-white">
+                  {strongTagText.length > 0 ? (
+                    strongTagText.slice(0, 3).map((text, index) => (
+                      <p key={index} className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        {text}
+                      </p>
+                    ))
+                  ) : (
+                    <>
+                      <p className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        Free Cancellation
+                      </p>
+                      <p className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        Book with ₹0 Payment
+                      </p>
+                      <p className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        Free Wifi
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
+            </div>
 
-              <p className=" text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden w-[240px] text-white">
-                {rating} Rating
-              </p>
-              <p className=" text-[15px] text-white font-semibold">{address}{"-"}{zip}</p>
-
+            <div className="hotelPriceBox px-2">
+              {hotelDescription ? (
+                <div className="hotelDescription text-white mt-4 line-clamp-3">
+                  <div dangerouslySetInnerHTML={{ __html: hotelDescription }} />
+                </div>
+              ) : (
+                <>
+                  <div className="text-white mt-4 line-clamp-3">
+                    Amenities: Luxury hotels offer high-end amenities like
+                    designer bathrobes, spa-quality toiletries, and plush
+                    bedding. Some hotels also have in-room hot tubs, fireplaces,
+                    and private balconies. Service: Luxury hotels go above and
+                    beyond to anticipate guests' needs and create unforgettable
+                    experiences. This includes stocking guests' favorite drinks
+                    in the mini-bar, arranging surprise celebrations, and
+                    providing personalized recommendations for local attractions
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

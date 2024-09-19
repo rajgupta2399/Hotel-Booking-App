@@ -27,11 +27,11 @@ const HotelCityCard = () => {
 
   return (
     <>
-      <div className=" flex flex-row gap-10">
+      <div className=" flex flex-row gap-10 bg-[#1a1e21]">
         <div className=" w-[450px] border-2 border-white h-[100vh]">
           <h1>Filter</h1>
         </div>
-        <div className=" flex flex-col w-full h-[100vh] overflow-y-auto border border-gray-300 overscroll-auto scrollbar-hide px-10 py-5">
+        <div className=" flex flex-col w-full h-[100vh] overflow-y-auto border border-gray-300 overscroll-auto scrollbar-hide px-10 py-5 rounded-lg">
           {dummy.map((item, index) => (
             <MainHotelCard item={item} />
           ))}
