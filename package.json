@@ -21,6 +21,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^10.13.1",
+    "flowbite-react": "^0.10.1",
     "framer-motion": "^11.5.4",
     "lucide-react": "^0.441.0",
     "primereact": "^10.8.2",

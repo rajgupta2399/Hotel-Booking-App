@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import useCityHotel from "../Hooks/useCityHotel";
 import { Divider } from "@mui/material";
 import { CityCoordinates } from "../context/ContextApi";
+import HotelCityCard from "./HotelCityCard";
 
 const HotelByCity = () => {
   const { city, setCity } = useContext(CityCoordinates);
@@ -11,7 +12,6 @@ const HotelByCity = () => {
   const [selectedCity, setSelectedCity] = useState(null);
 
   const CityCode = cityCode;
-  console.log(CityCode);
 
   // Handle search input change
   const handleSearchChange = (e) => {
@@ -25,11 +25,11 @@ const HotelByCity = () => {
   };
 
   // Handle city selection
-  const handleCitySelect = (city) => {
-    setSearchTerm(city);
+  const handleCitySelect = (item) => {
+    setSearchTerm(item.city);
     setFilteredCity([]);
-    setSelectedCity(city);
-    setCity(city);
+    setSelectedCity(item.city);
+    setCity(item);
   };
 
   return (
@@ -56,7 +56,7 @@ const HotelByCity = () => {
                     <li
                       key={index}
                       className="p-2 cursor-pointer text-white"
-                      onClick={() => handleCitySelect(item.city)}
+                      onClick={() => handleCitySelect(item)}
                     >
                       {item.city}
                     </li>
@@ -71,28 +71,14 @@ const HotelByCity = () => {
         {/* Display selected city */}
         {selectedCity && (
           <div className="text-white text-center mt-4">
-            Selected City: {selectedCity}
+            <h6 className="text-lg capitalize font-semibold text-white text-center mb-5">
+              Top Hotels Found in {selectedCity} City
+            </h6>
           </div>
         )}
       </div>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ad
-        alias facere, porro nostrum voluptate itaque harum architecto soluta
-        sapiente iusto expedita quos aspernatur veritatis ea ex doloribus
-        molestiae nam fugit rerum sint molestias. Magni recusandae laboriosam
-        quod, asperiores illum distinctio culpa voluptatibus, adipisci aut
-        eligendi quidem! Ab pariatur nisi iure velit repellendus, distinctio
-        facereequuntur facilis! Totam possimus illo consequatur maxime vel,
-        eligendi excepturi praesentium dolore et numquam nostrum iste alias
-        itaque vitae harum soluta accusamus, enim dolor molestiae quasi
-        officiis! Nostrum laudantium sequi ab dolorem reiciendis exercitationem
-        assumenda architecto repudiandae totam eveniet repellat excepturi, ea
-        perferendis eaque similique ipsa! Repudiandae eaque rem nulla nisi!
-        Consequuntur labore beatae nam ad iusto dicta reprehenderit voluptas
-        quae perspiciatis explicabo porro, molestiae animi. Iste maxime odit
-        vel?
-      </p>
+      <HotelCityCard />
     </>
   );
 };

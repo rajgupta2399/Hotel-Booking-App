@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className=" bg-[#1D232A]">
+      <div className=" bg-[#1D232A] px-28">
         <div className=" mt-3">
           <h5 className=" text-white px-24 font-semibold text-md py-3">
             Here Are Some Top Rated Hotels In {country.name}

@@ -3,7 +3,7 @@ import { CountryCoordinates } from "../context/ContextApi";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 
-const HotelCard = ({ item }) => {
+const MainHotelCard = ({ item }) => {
   const { country, setCountry } = useContext(CountryCoordinates);
   const {
     id,
@@ -30,8 +30,8 @@ const HotelCard = ({ item }) => {
   return (
     <div>
       <div>
-        <div className="mb-5 flex flex-wrap flex-row">
-          <div className="py-2 w-[390px] bg-[#292f35] cursor-pointer border-4 border-white rounded-md h-[455px]">
+        <div className="mb-5 flex flex-col">
+          <div className="py-2 w-[100%] bg-[#292f35] cursor-pointer border-4 border-white rounded-md h-[455px]">
             <div className="overflow-visible py-4 rounded-lg">
               <img
                 alt={name}
@@ -55,7 +55,7 @@ const HotelCard = ({ item }) => {
                 </div>
                 <div>
                   <p className="text-[14px] capitalize font-semibold text-white">
-                    <Rating name="size-medium" defaultValue={stars}  readOnly/>
+                    <Rating name="size-medium" defaultValue={stars} />
                   </p>
                 </div>
               </div>
@@ -73,4 +73,4 @@ const HotelCard = ({ item }) => {
   );
 };
 
-export default HotelCard;
+export default MainHotelCard;

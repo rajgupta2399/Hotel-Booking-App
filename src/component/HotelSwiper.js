@@ -21,7 +21,7 @@ export default function HotelSwiper() {
 
   return (
     <>
-      <div className="px-24">
+      <div className="">
         <div>
           <Swiper
             className=""
