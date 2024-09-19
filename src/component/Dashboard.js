@@ -1,31 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import { options } from "../utils/Constant";
 import useCountryCodeHotel from "../Hooks/useCountryCodeHotel";
 import { useSelector } from "react-redux";
 import { CityCoordinates, CountryCoordinates } from "../context/ContextApi";
-// Import Swiper styles
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-
-import "swiper/css/pagination";
-// import required modules
-import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
-import HotelCard from "./HotelCard";
 import HotelSwiper from "./HotelSwiper";
 import { Divider } from "@mui/material";
 import HotelByCity from "./HotelByCity";
 import useCityHotel from "../Hooks/useCityHotel";
-import Footer from "./Footer";
+import useHotelFacility from "../Hooks/useHotelFacility";
 import BottomFooter from "./Footer";
-import SkeletonContainer from "./SkeletonContainer";
 
 export default function Dashboard() {
   useCountryCodeHotel();
   useCityHotel();
+  useHotelFacility();
   const Country = useSelector((store) => store.country.CountryHotelCode);
+  const fac = useSelector((store) => store.facility.hotelFacility);
   const { country, setCountry } = useContext(CountryCoordinates);
   const { city, setCity } = useContext(CityCoordinates);
+
+  // console.log(fac);
 
   return (
     <>
@@ -39,7 +32,6 @@ export default function Dashboard() {
         <div className="">
           <Divider className=" bg-white" />
         </div>
-
 
         <div>
           <div>

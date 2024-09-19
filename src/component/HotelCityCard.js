@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CityCoordinates, CountryCoordinates } from "../context/ContextApi";
 import { options } from "../utils/Constant";
-import HotelCard from "./HotelCard";
-import { Sidebar } from "primereact/sidebar";
 import MainHotelCard from "./MainHotelCard";
-import SkeletonContainer from "./SkeletonContainer";
 import NewSkeletonContainer from "./NewSkeletonContainer";
+import { useSelector } from "react-redux";
+import store from "../store/store";
+import useHotelFacility from "../Hooks/useHotelFacility";
 
 const HotelCityCard = () => {
-  const [visible, setVisible] = useState(true);
+  useHotelFacility();
   const [dummy, setDummy] = useState([]);
   const { country } = useContext(CountryCoordinates);
   const { city } = useContext(CityCoordinates);
+  const facility = useSelector((store) => store.facility.hotelFacility);
+
+  console.log(facility);
 
   const fetchCityHotel = async () => {
     const res = await fetch(
@@ -20,7 +23,7 @@ const HotelCityCard = () => {
     );
     const data = await res.json();
     console.log(data.data);
-    
+
     setDummy(data.data);
   };
 
@@ -31,20 +34,20 @@ const HotelCityCard = () => {
   return (
     <>
       <div className=" flex flex-row gap-10 bg-[#1a1e21]">
-        <div className=" w-[450px] border-2 border-white h-[100vh]">
-          <h1>Filter</h1>
-          <button
-          className="px-3 py-2 bg-red-500 rounded-xl"
-          onClick={() => {
-            const filterLogic = dummy.filter((res) => {
-              return res.rating > 9;
-            });
+        <div className=" w-[450px] border-2 border-white h-[100vh] overflow-y-auto">
 
-            setDummy(filterLogic);
-          }}
-        >
-          Top Rated Hotel Stays
-        </button>
+          <button
+            className="px-3 py-2 bg-red-500 rounded-xl"
+            onClick={() => {
+              const filterLogic = dummy.filter((res) => {
+                return res.rating > 9;
+              });
+
+              setDummy(filterLogic);
+            }}
+          >
+            Top Rated Hotel Stays
+          </button>
         </div>
         <div className=" flex flex-col w-full h-[100vh] overflow-y-auto border border-gray-300 overscroll-auto scrollbar-hide px-10 py-5 rounded-lg">
           {dummy && dummy.length > 0 ? (
