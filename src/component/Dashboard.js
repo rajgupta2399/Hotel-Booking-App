@@ -16,6 +16,8 @@ import HotelSwiper from "./HotelSwiper";
 import { Divider } from "@mui/material";
 import HotelByCity from "./HotelByCity";
 import useCityHotel from "../Hooks/useCityHotel";
+import Footer from "./Footer";
+import BottomFooter from "./Footer";
 
 export default function Dashboard() {
   useCountryCodeHotel();
@@ -27,19 +29,24 @@ export default function Dashboard() {
     <>
       <div className=" bg-[#1D232A] px-28">
         <div className=" mt-3">
-          <h5 className=" text-white px-24 font-semibold text-md py-3">
+          <h5 className=" text-white font-semibold text-md py-3">
             Here Are Some Top Rated Hotels In {country.name}
           </h5>
         </div>
         <HotelSwiper />
-        <div className=" px-24">
+        <div className="">
           <Divider className=" bg-white" />
         </div>
 
         <div>
           <HotelByCity />
         </div>
+        <div className="my-5">
+          <Divider className=" bg-white" />
+        </div>
       </div>
+
+      <BottomFooter/>
       {/**
                
       <div className="px-24">

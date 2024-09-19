@@ -29,6 +29,7 @@ export default function HotelSwiper() {
             slidesPerView={3}
             cssMode={true}
             // pagination={true}
+            loop={true}
             mousewheel={true}
             keyboard={true}
             autoplay={{
