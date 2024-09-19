@@ -12,7 +12,6 @@ const HotelCityCard = () => {
   const [dummy, setDummy] = useState([]);
   const { country } = useContext(CountryCoordinates);
   const { city } = useContext(CityCoordinates);
-  console.log(city.city);
 
   const fetchCityHotel = async () => {
     const res = await fetch(
@@ -20,6 +19,8 @@ const HotelCityCard = () => {
       options
     );
     const data = await res.json();
+    console.log(data.data);
+    
     setDummy(data.data);
   };
 
@@ -32,6 +33,18 @@ const HotelCityCard = () => {
       <div className=" flex flex-row gap-10 bg-[#1a1e21]">
         <div className=" w-[450px] border-2 border-white h-[100vh]">
           <h1>Filter</h1>
+          <button
+          className="px-3 py-2 bg-red-500 rounded-xl"
+          onClick={() => {
+            const filterLogic = dummy.filter((res) => {
+              return res.rating > 9;
+            });
+
+            setDummy(filterLogic);
+          }}
+        >
+          Top Rated Hotel Stays
+        </button>
         </div>
         <div className=" flex flex-col w-full h-[100vh] overflow-y-auto border border-gray-300 overscroll-auto scrollbar-hide px-10 py-5 rounded-lg">
           {dummy && dummy.length > 0 ? (
