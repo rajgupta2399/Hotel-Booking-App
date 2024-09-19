@@ -3,8 +3,12 @@ import useCityHotel from "../Hooks/useCityHotel";
 import { Divider } from "@mui/material";
 import { CityCoordinates } from "../context/ContextApi";
 import HotelCityCard from "./HotelCityCard";
+import { useSelector } from "react-redux";
+import store from "../store/store";
 
 const HotelByCity = () => {
+  const Country = useSelector((store) => store.country.CountryHotelCode);
+
   const { city, setCity } = useContext(CityCoordinates);
   const { cityCode } = useCityHotel();
   const [searchTerm, setSearchTerm] = useState("");

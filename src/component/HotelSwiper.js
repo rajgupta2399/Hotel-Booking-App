@@ -14,6 +14,7 @@ import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
 import HotelCard from "./HotelCard";
 import HotelByCity from "./HotelByCity";
 import Divider from "@mui/material/Divider";
+import SkeletonContainer from "./SkeletonContainer";
 
 export default function HotelSwiper() {
   useCountryCodeHotel();
@@ -47,7 +48,11 @@ export default function HotelSwiper() {
                 </SwiperSlide>
               ))
             ) : (
-              <p>No hotels available.</p>
+              <div className=" flex flex-wrap gap-10 mb-6">
+                <SkeletonContainer/> 
+                <SkeletonContainer/>
+                <SkeletonContainer/>
+              </div>
             )}
           </Swiper>
         </div>

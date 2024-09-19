@@ -4,6 +4,8 @@ import { options } from "../utils/Constant";
 import HotelCard from "./HotelCard";
 import { Sidebar } from "primereact/sidebar";
 import MainHotelCard from "./MainHotelCard";
+import SkeletonContainer from "./SkeletonContainer";
+import NewSkeletonContainer from "./NewSkeletonContainer";
 
 const HotelCityCard = () => {
   const [visible, setVisible] = useState(true);
@@ -32,9 +34,21 @@ const HotelCityCard = () => {
           <h1>Filter</h1>
         </div>
         <div className=" flex flex-col w-full h-[100vh] overflow-y-auto border border-gray-300 overscroll-auto scrollbar-hide px-10 py-5 rounded-lg">
-          {dummy.map((item, index) => (
-            <MainHotelCard item={item} />
-          ))}
+          {dummy && dummy.length > 0 ? (
+            <div className="flex flex-wrap gap-5">
+              {dummy.map((item, index) => (
+                <div key={item.id || index}>
+                  <MainHotelCard item={item} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className=" flex flex-wrap gap-10 mb-6 flex-col">
+              <NewSkeletonContainer />
+              <NewSkeletonContainer />
+              <NewSkeletonContainer />
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -18,6 +18,7 @@ import HotelByCity from "./HotelByCity";
 import useCityHotel from "../Hooks/useCityHotel";
 import Footer from "./Footer";
 import BottomFooter from "./Footer";
+import SkeletonContainer from "./SkeletonContainer";
 
 export default function Dashboard() {
   useCountryCodeHotel();
@@ -39,17 +40,19 @@ export default function Dashboard() {
           <Divider className=" bg-white" />
         </div>
 
+
         <div>
-          <HotelByCity />
-        </div>
-        <div className="my-5">
-          <Divider className=" bg-white" />
+          <div>
+            <HotelByCity />
+          </div>
+          <div className="my-5">
+            <Divider className=" bg-white" />
+          </div>
         </div>
       </div>
 
       <BottomFooter />
       {/**
-               
       <div className="px-24">
         {Country && Country.length > 0 ? (
           <div className="flex flex-wrap gap-5">
