@@ -7,6 +7,8 @@ import {
   BsInstagram,
   BsTwitter,
 } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { HOTEL_BOOKING_LOGO } from "../utils/Constant";
 
 const BottomFooter = () => {
   return (
@@ -15,43 +17,96 @@ const BottomFooter = () => {
         <div className="w-full">
           <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4">
             <div className=" px-24">
-              <Footer.Title title="Company" />
+              <Footer.Title
+                title="Company"
+                className=" flex justify-center align-middle"
+              />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">About</Footer.Link>
-                <Footer.Link href="#">Careers</Footer.Link>
-                <Footer.Link href="#">Brand Center</Footer.Link>
-                <Footer.Link href="#">Blog</Footer.Link>
+                <div className=" flex flex-col gap-3 ml-5">
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    About
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Careers
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Brand Center
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Blog
+                  </Link>
+                </div>
               </Footer.LinkGroup>
             </div>
             <div className="px-24">
-              <Footer.Title title="help center" />
+              <Footer.Title
+                title="help center"
+                className=" flex justify-center align-middle"
+              />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Discord Server</Footer.Link>
-                <Footer.Link href="#">Twitter</Footer.Link>
-                <Footer.Link href="#">Facebook</Footer.Link>
-                <Footer.Link href="#">Contact Us</Footer.Link>
+                <div className=" flex flex-col gap-3 ml-5">
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Discord Server
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Twitter
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Facebook
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Contact Us
+                  </Link>
+                </div>
               </Footer.LinkGroup>
             </div>
             <div className=" px-24">
-              <Footer.Title title="legal" />
+              <Footer.Title
+                title="legal"
+                className=" flex justify-center align-middle"
+              />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Privacy Policy</Footer.Link>
-                <Footer.Link href="#">Licensing</Footer.Link>
-                <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
+                <div className=" flex flex-col gap-3 ml-5">
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Privacy Policy
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Licensing
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Terms &amp; Conditions
+                  </Link>
+                </div>
               </Footer.LinkGroup>
             </div>
             <div className=" px-24">
-              <Footer.Title title="download" />
+              <Footer.Title
+                title="download"
+                className=" flex justify-center align-middle"
+              />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">iOS</Footer.Link>
-                <Footer.Link href="#">Android</Footer.Link>
-                <Footer.Link href="#">Windows</Footer.Link>
-                <Footer.Link href="#">MacOS</Footer.Link>
+                <div className=" flex flex-col gap-3 ml-5">
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    iOS
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Android
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    Windows
+                  </Link>
+                  <Link className=" text-white font-semibold text-decoration-none">
+                    MacOS
+                  </Link>
+                </div>
               </Footer.LinkGroup>
             </div>
           </div>
-          <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between">
-            <Footer.Copyright href="#" by="Flowbite™" year={2022} />
+          <div className="w-full bg-gray-700 px-24 py-6 sm:flex sm:items-center sm:justify-between">
+            <div className=" flex gap-3">
+              <p className=" py-1 text-white font-bold"> &copy; 2024</p>
+              <img src={HOTEL_BOOKING_LOGO} className=" h-9 w-auto" alt="" />
+            </div>
             <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
               <Footer.Icon href="#" icon={BsFacebook} />
               <Footer.Icon href="#" icon={BsInstagram} />

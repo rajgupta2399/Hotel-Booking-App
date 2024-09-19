@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import '../App.css'
+import "../App.css";
 import {
   Dialog,
   DialogPanel,
@@ -28,7 +28,7 @@ import ResponsiveAppBar from "./Avatar";
 import { Link } from "react-router-dom";
 import { Sidebar } from "primereact/sidebar";
 import CloseIcon from "@mui/icons-material/Close";
-import { options } from "../utils/Constant";
+import { HOTEL_BOOKING_LOGO, options } from "../utils/Constant";
 import { CountryCoordinates } from "../context/ContextApi";
 import Divider from "@mui/material/Divider";
 
@@ -36,7 +36,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [countryCode, setCountryCode] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [searchText, setSearchText] = useState([]);
   const { country, setCountry } = useContext(CountryCoordinates);
@@ -74,7 +74,7 @@ export default function Header() {
 
   const handleCountryName = (item) => {
     setSearchText(item);
-    setSearchTerm("")
+    setSearchTerm("");
     setCountry({
       code: item.code,
       name: item.name,
@@ -84,7 +84,11 @@ export default function Header() {
 
   return (
     <div>
-      <div className={`fixed inset-0 bg-[#1D232A] bg-opacity-5 backdrop-blur-sm z-[999] ${visible ? '' : 'hidden'}`}>
+      <div
+        className={`fixed inset-0 bg-[#1D232A] bg-opacity-5 backdrop-blur-sm z-[999] ${
+          visible ? "" : "hidden"
+        }`}
+      >
         <Sidebar
           visible={visible}
           onHide={() => setVisible(false)}
@@ -116,25 +120,23 @@ export default function Header() {
           </div>
           <div className="flex justify-center align-middle my-5 mx-4">
             <ul className="max-h-[65vh] overflow-y-scroll scrollbar-hide">
-              {filteredCountries.length > 0 ? (
-                filteredCountries.map((item, index) => (
-                  <div className="flex" key={index}>
-                    <div>
-                      <i className="fa-solid fa-location-dot mr-2 mt-[20px] text-white text-lg"></i>
+              {filteredCountries.length > 0
+                ? filteredCountries.map((item, index) => (
+                    <div className="flex" key={index}>
+                      <div>
+                        <i className="fa-solid fa-location-dot mr-2 mt-[20px] text-white text-lg"></i>
+                      </div>
+                      <div>
+                        <li
+                          className="my-6 cursor-pointer hover:text-red-600 transition-all delay-100 text-white"
+                          onClick={() => handleCountryName(item)}
+                        >
+                          {item.code}, {item.name}
+                        </li>
+                      </div>
                     </div>
-                    <div>
-                      <li
-                        className="my-6 cursor-pointer hover:text-red-600 transition-all delay-100 text-white"
-                        onClick={() => handleCountryName(item)}
-                      >
-                        {item.code}, {item.name}
-                      </li>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                ""
-              )}
+                  ))
+                : ""}
             </ul>
           </div>
         </Sidebar>
@@ -150,11 +152,7 @@ export default function Header() {
         >
           <div className="flex lg:flex-1 gap-5">
             <a href="#" className="-m-1.5 p-1.5">
-              <img
-                alt=""
-                src="https://pngimagesfree.com/wp-content/uploads/Make-My-Trip-Logo-PNG@.png"
-                className=" h-9 w-auto"
-              />
+              <img alt="" src={HOTEL_BOOKING_LOGO} className=" h-9 w-auto" />
             </a>
             <div
               className="flex items-center gap-2 cursor-pointer py-1"
