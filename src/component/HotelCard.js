@@ -22,22 +22,21 @@ const HotelCard = ({ item }) => {
     hotelDescription,
   } = item;
 
-  
-  
-
   //   const country = useSelector((store) => store.country.CountryHotelCode);
   //   console.log(country);
   return (
     <div>
       <div>
         <div className="mb-5 flex flex-wrap flex-row">
-          <div className="py-2 w-[390px] bg-[#292f35] cursor-pointer border-4 border-white rounded-md h-[455px]">
+          <div className="py-2 w-[390px] bg-[#14181B] cursor-pointer border-4 border-white rounded-md h-[455px]">
             <div className="overflow-visible py-4 rounded-lg">
               <img
                 alt={name}
                 className="px-4 h-[200px] rounded-lg object-cover"
                 src={
-                    main_photo ? main_photo : "https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D"
+                  main_photo
+                    ? main_photo
+                    : "https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D"
                 }
                 width="100%"
               />
@@ -55,7 +54,7 @@ const HotelCard = ({ item }) => {
                 </div>
                 <div>
                   <p className="text-[14px] capitalize font-semibold text-white">
-                    <Rating name="size-medium" defaultValue={stars}  readOnly/>
+                    <Rating name="size-medium" defaultValue={stars} readOnly />
                   </p>
                 </div>
               </div>
@@ -63,8 +62,11 @@ const HotelCard = ({ item }) => {
               <p className=" text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden w-[240px] text-white">
                 {rating} Rating
               </p>
-              <p className=" text-[15px] text-white font-semibold">{address}{"-"}{zip}</p>
-
+              <p className=" text-[15px] text-white font-semibold">
+                {address}
+                {"-"}
+                {zip}
+              </p>
             </div>
           </div>
         </div>

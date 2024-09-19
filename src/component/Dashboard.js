@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { options } from "../utils/Constant";
 import useCountryCodeHotel from "../Hooks/useCountryCodeHotel";
 import { useSelector } from "react-redux";
-import { CountryCoordinates } from "../context/ContextApi";
+import { CityCoordinates, CountryCoordinates } from "../context/ContextApi";
 // Import Swiper styles
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -24,6 +24,7 @@ export default function Dashboard() {
   useCityHotel();
   const Country = useSelector((store) => store.country.CountryHotelCode);
   const { country, setCountry } = useContext(CountryCoordinates);
+  const { city, setCity } = useContext(CityCoordinates);
 
   return (
     <>
@@ -46,7 +47,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <BottomFooter/>
+      <BottomFooter />
       {/**
                
       <div className="px-24">
