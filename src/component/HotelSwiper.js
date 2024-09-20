@@ -41,17 +41,17 @@ export default function HotelSwiper() {
           >
             {Country && Country.length > 0 ? (
               Country.slice(0, 15).map((item, index) => (
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                   <div key={item.id || index} className=" shadow-md">
-                    <HotelCard item={item} />
+                    <HotelCard item={item} key={index} />
                   </div>
                 </SwiperSlide>
               ))
             ) : (
               <div className=" flex flex-wrap gap-10 mb-6">
-                <SkeletonContainer/> 
-                <SkeletonContainer/>
-                <SkeletonContainer/>
+                <SkeletonContainer />
+                <SkeletonContainer />
+                <SkeletonContainer />
               </div>
             )}
           </Swiper>

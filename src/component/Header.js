@@ -84,7 +84,7 @@ export default function Header() {
 
   return (
     <div>
-    {/** Sidebar */}
+      {/** Sidebar */}
       <div
         className={`fixed inset-0 bg-[#1D232A] bg-opacity-5 backdrop-blur-sm z-[999] ${
           visible ? "" : "hidden"
@@ -143,12 +143,9 @@ export default function Header() {
         </Sidebar>
       </div>
 
-    {/** Header */}
+      {/** Header */}
 
-      <header
-        className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px]"
-        style={styleCard}
-      >
+      <header className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px]">
         <nav
           aria-label="Global"
           className="mx-auto flex w-full items-center justify-between p-6 lg:px-8 text-white"
@@ -160,7 +157,6 @@ export default function Header() {
             <div
               className="flex items-center gap-2 cursor-pointer py-1"
               onClick={() => setVisible(true)}
-              styleCard={styleCard}
             >
               {searchText ? (
                 <p className="font-bold border-b-2 dark:border-white dark:text-white hover:text-[#ED3237] transition-all delay-100 ease-in-out whitespace-nowrap w-[110px] overflow-hidden text-ellipsis text-center">
