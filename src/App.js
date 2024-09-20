@@ -5,7 +5,11 @@ import { Toaster } from "react-hot-toast";
 import RequireAuth from "./context/RequireAuth"; // Ensure correct path
 import Header from "./component/Header";
 import { useState } from "react";
-import { CityCoordinates, CountryCoordinates } from "../src/context/ContextApi";
+import {
+  CityCoordinates,
+  CountryCoordinates,
+  HotelDetailsId,
+} from "../src/context/ContextApi";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
 import HotelDetails from "./component/HotelDetails";
@@ -20,19 +24,22 @@ function App() {
   const { currentUser } = useAuth();
   const [country, setCountry] = useState({ code: "CH", name: "Switzerland" });
   const [city, setCity] = useState({ city: "Zürich" });
+  const [id, setId] = useState({ id: "lp19c62" });
   return (
     <div className="bg-[#1d232a]">
       <Provider store={store}>
-        <CountryCoordinates.Provider value={{ country, setCountry }}>
-          <CityCoordinates.Provider value={{ city, setCity }}>
-            <AuthProvider>
-              {currentUser ? <Header /> : null}
-              <Outlet />
-              <Toaster />
-              {currentUser ? <BottomFooter /> : null}
-            </AuthProvider>
-          </CityCoordinates.Provider>
-        </CountryCoordinates.Provider>
+        <HotelDetailsId.Provider value={{ id, setId }}>
+          <CountryCoordinates.Provider value={{ country, setCountry }}>
+            <CityCoordinates.Provider value={{ city, setCity }}>
+              <AuthProvider>
+                {currentUser ? <Header /> : null}
+                <Outlet />
+                <Toaster />
+                {currentUser ? <BottomFooter /> : null}
+              </AuthProvider>
+            </CityCoordinates.Provider>
+          </CountryCoordinates.Provider>
+        </HotelDetailsId.Provider>
       </Provider>
     </div>
   );
