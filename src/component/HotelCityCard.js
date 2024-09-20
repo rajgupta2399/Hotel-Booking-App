@@ -34,8 +34,7 @@ const HotelCityCard = () => {
         <div className=" w-[450px] border-2 border-white h-[100vh] overflow-y-auto py-3">
           {facility?.length > 0 ? (
             facility
-              // .filter((_, index) => index !== 3) // Skip the 4th element (index 3)
-              // .slice(0, 15)
+              .filter((_, index) => index !== 3)
               .map((item, index) => (
                 <div key={index} className="flex px-2 gap-2">
                   <input
@@ -78,7 +77,9 @@ const HotelCityCard = () => {
           ) : (
             <div className=" flex flex-wrap gap-10 mb-6 flex-col">
               <div>
-                <p className="text-white">No Hotels available For This Filters</p>
+                <p className="text-white">
+                  No Hotels available For This Filters
+                </p>
               </div>
               <NewSkeletonContainer />
               <NewSkeletonContainer />
