@@ -43,7 +43,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <BottomFooter />
       {/**
       <div className="px-24">
         {Country && Country.length > 0 ? (

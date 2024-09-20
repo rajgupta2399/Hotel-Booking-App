@@ -9,6 +9,7 @@ import { CityCoordinates, CountryCoordinates } from "../src/context/ContextApi";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
 import HotelDetails from "./component/HotelDetails";
+import BottomFooter from "./component/Footer";
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
 const Login = lazy(() => import("../src/component/Login"));
@@ -28,6 +29,7 @@ function App() {
               {currentUser ? <Header /> : null}
               <Outlet />
               <Toaster />
+              {currentUser ? <BottomFooter /> : null}
             </AuthProvider>
           </CityCoordinates.Provider>
         </CountryCoordinates.Provider>
