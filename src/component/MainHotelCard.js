@@ -66,10 +66,11 @@ const MainHotelCard = ({ item }) => {
                     {"-"}
                     {zip}
                   </p>
-                  <div className="rating">
+                  <div className="rating flex gap-10">
                     <p className=" text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden  text-yellow-200 mt-[-7px]">
                       {rating} ({reviewCount}) ReviewCount
                     </p>
+                    <p className="text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden  text-green-500 mt-[-7px] font-semibold">view on Map</p>
                   </div>
                 </div>
                 <div className="hotelStrongText text-white">

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { CityCoordinates, CountryCoordinates } from "../src/context/ContextApi";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
+import HotelDetails from "./component/HotelDetails";
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
 const Login = lazy(() => import("../src/component/Login"));
@@ -76,6 +77,16 @@ export const appRouter = createBrowserRouter([
           <RequireAuth>
             <Suspense fallback={<div>Loading...</div>}>
               <Dashboard />
+            </Suspense>
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/HotelDetails/:hotelId",
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<div>Loading...</div>}>
+              <HotelDetails />
             </Suspense>
           </RequireAuth>
         ),
