@@ -18,8 +18,6 @@ const useHotelFacility = () => {
   useEffect(() => {
     fetchHotelFacility();
   }, []);
-
-  return <div>useHotelFacility</div>;
 };
 
 export default useHotelFacility;
