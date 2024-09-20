@@ -3,6 +3,7 @@ import countryHotelReducer from "./countrySlice";
 import hotelFacilityReducer from "./facilitySlice";
 import cityHotelReducer from "./cityHotelSlice";
 import hotelDetailReducer from "./hotelDetailSlice";
+import hotelReviewReducer from "./hotelReviewSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     facility: hotelFacilityReducer,
     cityHotel: cityHotelReducer,
     hotelDetail: hotelDetailReducer,
+    hotelReview: hotelReviewReducer,
   },
 });
 
