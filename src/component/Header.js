@@ -84,6 +84,7 @@ export default function Header() {
 
   return (
     <div>
+    {/** Sidebar */}
       <div
         className={`fixed inset-0 bg-[#1D232A] bg-opacity-5 backdrop-blur-sm z-[999] ${
           visible ? "" : "hidden"
@@ -141,6 +142,8 @@ export default function Header() {
           </div>
         </Sidebar>
       </div>
+
+    {/** Header */}
 
       <header
         className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px]"
