@@ -151,9 +151,9 @@ export default function Header() {
           className="mx-auto flex w-full items-center justify-between p-6 lg:px-8 text-white"
         >
           <div className="flex lg:flex-1 gap-5">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link to={"/Dashboard"} className="-m-1.5 p-1.5">
               <img alt="" src={HOTEL_BOOKING_LOGO} className=" h-9 w-auto" />
-            </a>
+            </Link>
             <div
               className="flex items-center gap-2 cursor-pointer py-1"
               onClick={() => setVisible(true)}

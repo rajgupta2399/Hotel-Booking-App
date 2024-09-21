@@ -5,7 +5,7 @@ import useHotelDetail from "../Hooks/useHotelDetail";
 import useHotelReview from "../Hooks/useHotelReview";
 import { useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
-import { Rating } from "@mui/material";
+import { Divider, Rating } from "@mui/material";
 
 const HotelDetails = () => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -25,17 +25,18 @@ const HotelDetails = () => {
 
   return (
     <div className=" bg-[#1D232A] text-white px-24">
-      <div className="centeralContainer mt-5">
-        <div className="imageDivBox flex gap-5 border-2 bg-[#14181B] px-4 py-4 rounded-lg">
-          <div className="hotelImages">
+      <div className="centeralContainer mt-5  border-2 rounded-lg">
+        <div className="imageDivBox flex gap-1 bg-[#14181B] px-4 py-4 rounded-lg w-[100%]">
+          <div className="hotelImages w-full">
             <div className="HotelName flex gap-4 mb-2">
               <h1 className=" text-lg text-white">
                 {hotelDetail && hotelDetail.name}
               </h1>
               <Rating
                 name="size-small"
-                defaultValue={hotelDetail?.starRating}
+                defaultValue={hotelDetail && hotelDetail?.starRating}
                 readOnly
+                className=" text-white"
               />
             </div>
 
@@ -99,13 +100,76 @@ const HotelDetails = () => {
 
             <div className=" w-[50%]"></div>
           </div>
-          <div className="otherThings">
-            <div className="">
-              <p>{hotelDetail?.hotelImportantInformation}</p>
+          <div className="otherThings w-[60%] border-2 bg-[#1D232A] rounded-lg h-full">
+            <div>
+              <div className=" mt-3">
+                <h5 className=" text-md text-center font-bold">
+                  Hotel Important Information
+                </h5>
+                <p className=" px-3">
+                  {hotelDetail?.hotelImportantInformation}
+                </p>
+              </div>
+            </div>
+
+            <div className=" flex gap-1 justify-between px-14 py-2 w-[470px]">
+              <div className="flex gap-1 border-2 py-3 px-2  rounded-lg">
+                <div className=" px-2">
+                  <p className="rating bg-[#0077b6] w-[70px] px-4 py-3 text-center rounded-lg font-bold">
+                    {hotelDetail?.rating}
+                  </p>
+                </div>
+                <div className="rating px-2">
+                  <div className="div1">
+                    <Rating
+                      name="size-small"
+                      defaultValue={hotelDetail && hotelDetail?.starRating}
+                      readOnly
+                      className=" text-yellow-300"
+                    />
+                  </div>
+                  <div className="div2">
+                    <p className=" font-semibold">
+                      ({hotelDetail?.reviewCount}) Rating
+                    </p>
+                  </div>
+                </div>
+                <div className="review px-2 py-3 text-[#0077b6]">
+                  <p className=" font-bold">All Reviews</p>
+                </div>
+              </div>
+            </div>
+
+            <div className=" flex gap-1 justify-between px-14 py-2 w-[465px]">
+              <div className="flex gap-3 justify-center border-2 py-2 px-2  rounded-lg">
+                <div className=" py-1">
+                  <img
+                    src="https://imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/map-icon-dtls.png"
+                    alt=""
+                    className=" w-24"
+                  />
+                </div>
+                <div className="rating">
+                  <div className="div1 py-0">
+                    <p>
+                      {hotelDetail && hotelDetail?.address}, {hotelDetail?.city}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="book flex justify-center mt-4 mb-5">
+              <div className="bookdiv w-[50%] flex justify-center align-middle">
+                <button className=" text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-full">
+                  Book Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div className="PriceDivBox"></div>
+
+        {/** bOOK Hotel Rooms */}
       </div>
     </div>
   );
