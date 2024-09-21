@@ -8,6 +8,7 @@ import HotelByCity from "./HotelByCity";
 import useCityHotel from "../Hooks/useCityHotel";
 import useHotelFacility from "../Hooks/useHotelFacility";
 import BottomFooter from "./Footer";
+import Testimonial from "./Testimonial";
 
 export default function Dashboard() {
   useCountryCodeHotel();
@@ -42,6 +43,8 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+    <Testimonial/>
 
       {/**
       <div className="px-24">
