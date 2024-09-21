@@ -152,10 +152,10 @@ const HotelRooms = ({ item, strongTagText }) => {
           </div>
         </div>
 
-        <div className=" flex justify-center align-middle">
-          <div>
+        <div className=" mt-3 mb-4">
+          <div className="w-[100%] flex justify-center">
             <button
-              className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md"
+              className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-[30%]"
               onClick={() => handleClick(item)}
             >
               Book Now

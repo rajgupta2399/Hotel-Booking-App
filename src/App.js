@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import store from "../src/store/store";
 import HotelDetails from "./component/HotelDetails";
 import BottomFooter from "./component/Footer";
+import ErrorPage from "./component/ErrorPage";
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
 const Login = lazy(() => import("../src/component/Login"));
@@ -101,6 +102,6 @@ export const appRouter = createBrowserRouter([
         ),
       },
     ],
-    errorElement: <div>404 - Page not found</div>,
+    errorElement: <ErrorPage />,
   },
 ]);
