@@ -134,16 +134,15 @@ const HotelRooms = ({ item, strongTagText }) => {
         <div>
           <div className="marquee">
             <div className="text px-2 py-2">
-              <h6 className="text-[#0077b6] text-md px-4 text-[18px]">Room Ameneities</h6>
+              <h6 className="text-[#0077b6] text-md px-4 text-[18px]">
+                Room Ameneities
+              </h6>
             </div>
             <div className="marquee-content">
-              <ul  className=" text-white flex justify-between flex-wrap gap-3 px-7">
-                {roomAmenities.slice(0,30).map((amenity, index) => (
-                  <li
-                    key={amenity.amenitiesId}
-                   className=" font-semibold"
-                  >
-                  <FiberManualRecordIcon className=" px-1 text-green-500 mb-1" />
+              <ul className=" text-white flex justify-between flex-wrap gap-3 px-7">
+                {roomAmenities.slice(0, 30).map((amenity, index) => (
+                  <li key={amenity.amenitiesId} className=" font-semibold">
+                    <FiberManualRecordIcon className=" px-1 text-green-500 mb-1" />
 
                     {amenity.name}
                   </li>
@@ -152,13 +151,16 @@ const HotelRooms = ({ item, strongTagText }) => {
             </div>
           </div>
         </div>
-        <div>
-          <button
-            className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md"
-            onClick={() => handleClick(item)}
-          >
-            Book Now
-          </button>
+
+        <div className=" flex justify-center align-middle">
+          <div>
+            <button
+              className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md"
+              onClick={() => handleClick(item)}
+            >
+              Book Now
+            </button>
+          </div>
         </div>
       </div>
     </div>
