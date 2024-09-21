@@ -175,7 +175,7 @@ const HotelDetails = () => {
         <div className="hotelRoom">
           {hotelDetail &&
             hotelDetail?.rooms.map((item, index) => {
-              return <HotelRooms key={index} item={item} />;
+              return <HotelRooms key={index} item={item} strongTagText={strongTagText} />;
             })}
         </div>
       </div>

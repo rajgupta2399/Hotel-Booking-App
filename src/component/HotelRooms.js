@@ -5,9 +5,11 @@ import useHotelDetail from "../Hooks/useHotelDetail";
 import useHotelReview from "../Hooks/useHotelReview";
 import { useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+
 import { Divider, Rating } from "@mui/material";
 
-const HotelRooms = ({ item }) => {
+const HotelRooms = ({ item, strongTagText }) => {
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
   setId(hotelId);
@@ -18,21 +20,32 @@ const HotelRooms = ({ item }) => {
   // console.log(hotelReview);
   // console.log(hotelDetail);
 
-  const { roomName, photos } = item;
+  const {
+    roomName,
+    photos,
+    description,
+    maxAdults,
+    maxChildren,
+    roomAmenities,
+  } = item;
 
   const handleClick = (item) => {
     console.log(item.id);
   };
 
   return (
-    <div className=" bg-[#1D232A] text-white px-24">
-      <div className="centeralContainer mt-5  border-2 rounded-lg">
+    <div className=" text-white px-24">
+      <div className="centeralContainer mt-5  border-2 rounded-lg bg-[#14181B] ">
         {/** bOOK Hotel Rooms */}
         <div className="imageBox">
-          <div className="images  flex">
-            <div className="flex gap-2 flex-row border-2 px-2 py-2 my-2 mx-2 rounded-lg">
+          <div className="images flex w-full">
+            <div className="flex gap-2 flex-row border-2 px-4 py-3 my-2 mx-2 rounded-lg w-[70%]">
               <div className=" w-[490px] rounded-lg ">
-                <img src={photos?.[0]?.url} alt="" className="rounded-xl object-cover" />
+                <img
+                  src={photos?.[0]?.url}
+                  alt=""
+                  className="rounded-xl object-cover"
+                />
               </div>
               <div className=" flex flex-col gap-2">
                 <div className=" w-[238px] rounded-lg h-[160px]">
@@ -64,7 +77,79 @@ const HotelRooms = ({ item }) => {
                 </div>
               </div>
             </div>
-            <h1>{roomName}</h1>
+            <div className=" w-[30%] border-2 py-3 my-2 mr-2 rounded-lg">
+              <div className="hotelDetails  h-full">
+                <div className="hotelName">
+                  <h6 className=" text-[18px] text-center py-2 px-3">
+                    {roomName}
+                  </h6>
+                </div>
+                <div className="hotelStrongText text-white mb-4">
+                  <h6 className="text-sm text-center px-3">{description}</h6>
+                </div>
+
+                <div className="text-white px-1">
+                  {strongTagText.length > 0 ? (
+                    strongTagText.slice(0, 3).map((text, index) => (
+                      <div className="">
+                        <p key={index} className="font-semibold mt-[-7px]">
+                          <FiberManualRecordIcon className=" px-1 text-green-500 mb-1" />
+                          {text}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <p className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        Free Cancellation
+                      </p>
+                      <p className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        Book with ₹0 Payment
+                      </p>
+                      <p className="font-semibold mt-[-5px]">
+                        <CheckSharpIcon className=" px-1 text-green-500" />
+                        Free Wifi
+                      </p>
+                    </>
+                  )}
+                </div>
+
+                <div className="cap px-4">
+                  <div>
+                    <h6 className="text-sm text-white">
+                      MaxAdults : {maxAdults}
+                    </h6>
+                    <h6 className="text-sm text-white">
+                      MaxChildren : {maxChildren}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="marquee">
+            <div className="text px-2 py-2">
+              <h6 className="text-[#0077b6] text-md px-4 text-[18px]">Room Ameneities</h6>
+            </div>
+            <div className="marquee-content">
+              <ul  className=" text-white flex justify-between flex-wrap gap-3 px-7">
+                {roomAmenities.slice(0,30).map((amenity, index) => (
+                  <li
+                    key={amenity.amenitiesId}
+                   className=" font-semibold"
+                  >
+                  <FiberManualRecordIcon className=" px-1 text-green-500 mb-1" />
+
+                    {amenity.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
         <div>
