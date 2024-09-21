@@ -6,6 +6,7 @@ import useHotelReview from "../Hooks/useHotelReview";
 import { useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import { Divider, Rating } from "@mui/material";
+import HotelRooms from "./HotelRooms";
 
 const HotelDetails = () => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -36,7 +37,7 @@ const HotelDetails = () => {
                 name="size-small"
                 defaultValue={hotelDetail && hotelDetail?.starRating}
                 readOnly
-                className=" text-white"
+                className=" text-yello-300"
               />
             </div>
 
@@ -151,9 +152,10 @@ const HotelDetails = () => {
                 </div>
                 <div className="rating">
                   <div className="div1 py-0">
-                    <p>
+                    <h6>
                       {hotelDetail && hotelDetail?.address}, {hotelDetail?.city}
-                    </p>
+                    </h6>
+                    <h6 className=" text-[#0077b6]">View On Map</h6>
                   </div>
                 </div>
               </div>
@@ -170,6 +172,12 @@ const HotelDetails = () => {
         </div>
 
         {/** bOOK Hotel Rooms */}
+        <div className="hotelRoom">
+          {hotelDetail &&
+            hotelDetail?.rooms.map((item, index) => {
+              return <HotelRooms key={index} item={item} />;
+            })}
+        </div>
       </div>
     </div>
   );
