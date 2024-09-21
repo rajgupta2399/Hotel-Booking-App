@@ -5,9 +5,8 @@ import useHotelDetail from "../Hooks/useHotelDetail";
 import useHotelReview from "../Hooks/useHotelReview";
 import { useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
+import { Link } from "react-router-dom";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-
-import { Divider, Rating } from "@mui/material";
 
 const HotelRooms = ({ item, strongTagText }) => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -17,8 +16,6 @@ const HotelRooms = ({ item, strongTagText }) => {
   useHotelReview();
   const hotelReview = useSelector((store) => store.hotelReview.hotelReview);
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
-  // console.log(hotelReview);
-  // console.log(hotelDetail);
 
   const {
     roomName,
@@ -70,9 +67,14 @@ const HotelRooms = ({ item, strongTagText }) => {
                     className="rounded-xl object-cover w-full h-full"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-xl">
-                    <span className="text-white font-semibold">
-                      MORE IMAGES
-                    </span>
+                    <Link
+                        to={"/MoreImages"}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <span className="text-white font-semibold">
+                          MORE IMAGES
+                        </span>
+                      </Link>
                   </div>
                 </div>
               </div>

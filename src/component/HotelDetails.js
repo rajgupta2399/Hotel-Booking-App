@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
 import useHotelDetail from "../Hooks/useHotelDetail";
 import useHotelReview from "../Hooks/useHotelReview";
@@ -65,9 +65,14 @@ const HotelDetails = () => {
                       className="rounded-xl w-full h-full"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-xl">
-                      <span className="text-white font-semibold">
-                        MORE IMAGES
-                      </span>
+                      <Link
+                        to={"/MoreImages"}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <span className="text-white font-semibold">
+                          MORE IMAGES
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -172,10 +177,16 @@ const HotelDetails = () => {
         </div>
 
         {/** bOOK Hotel Rooms */}
-        <div className="hotelRoom">
+        <div className="hotelRoom py-5">
           {hotelDetail &&
             hotelDetail?.rooms.map((item, index) => {
-              return <HotelRooms key={index} item={item} strongTagText={strongTagText} />;
+              return (
+                <HotelRooms
+                  key={index}
+                  item={item}
+                  strongTagText={strongTagText}
+                />
+              );
             })}
         </div>
       </div>
