@@ -9,7 +9,7 @@ const useHotelReview = () => {
   const dispatch = useDispatch();
   const fetchHotelReview = async () => {
     const res = await fetch(
-      `https://api.liteapi.travel/v3.0/data/reviews?hotelId=${id}&timeout=4`,
+      `https://api.liteapi.travel/v3.0/data/reviews?hotelId=${id}&limit=1000&timeout=4`,
       options
     );
     const data = await res.json();

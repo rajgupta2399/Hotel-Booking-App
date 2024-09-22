@@ -44,7 +44,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-    <Testimonial/>
 
       {/**
       <div className="px-24">

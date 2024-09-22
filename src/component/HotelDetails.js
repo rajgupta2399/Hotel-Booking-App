@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import { Divider, Rating } from "@mui/material";
 import HotelRooms from "./HotelRooms";
+import Testimonial from "./Testimonial";
 
 const HotelDetails = () => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -189,6 +190,10 @@ const HotelDetails = () => {
               );
             })}
         </div>
+      </div>
+
+      <div className=" my-5">
+        <Testimonial/>
       </div>
     </div>
   );

@@ -7,14 +7,14 @@ import { CountryCoordinates } from "../context/ContextApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-
 import "swiper/css/pagination";
-// import required modules
-import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
-import HotelCard from "./HotelCard";
-import HotelByCity from "./HotelByCity";
-import Divider from "@mui/material/Divider";
 import SkeletonContainer from "./SkeletonContainer";
+import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
+
+// import required modules
+import HotelCard from "./HotelCard";
+import Divider from "@mui/material/Divider";
+import HotelByCity from "./HotelByCity";
 
 export default function HotelSwiper() {
   useCountryCodeHotel();
