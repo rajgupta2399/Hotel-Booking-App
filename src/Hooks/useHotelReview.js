@@ -13,7 +13,6 @@ const useHotelReview = () => {
       options
     );
     const data = await res.json();
-    console.log(data.data);
     dispatch(addHotelReview(data.data));
   };
 

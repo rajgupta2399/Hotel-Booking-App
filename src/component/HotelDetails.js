@@ -8,6 +8,7 @@ import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import { Divider, Rating } from "@mui/material";
 import HotelRooms from "./HotelRooms";
 import Testimonial from "./Testimonial";
+import HotelLocation from "./HotelLocation";
 
 const HotelDetails = () => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -142,7 +143,9 @@ const HotelDetails = () => {
                   </div>
                 </div>
                 <div className="review px-2 py-3 text-[#0077b6]">
-                  <p className=" font-bold">All Reviews</p>
+                  <link>
+                    <p className=" font-bold">All Reviews</p>
+                  </link>
                 </div>
               </div>
             </div>
@@ -161,7 +164,9 @@ const HotelDetails = () => {
                     <h6>
                       {hotelDetail && hotelDetail?.address}, {hotelDetail?.city}
                     </h6>
-                    <h6 className=" text-[#0077b6]">View On Map</h6>
+                    <link>
+                      <h6 className=" text-[#0077b6]">View On Map</h6>
+                    </link>
                   </div>
                 </div>
               </div>
@@ -192,8 +197,12 @@ const HotelDetails = () => {
         </div>
       </div>
 
+      <div className=" mt-5">
+        <HotelLocation />
+      </div>
+
       <div className=" my-5">
-        <Testimonial/>
+        <Testimonial />
       </div>
     </div>
   );
