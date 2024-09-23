@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
 import useHotelDetail from "../Hooks/useHotelDetail";
@@ -9,19 +9,38 @@ import { Link } from "react-router-dom";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import Testimonial from "./Testimonial";
 
-// hotelId,
-// adultCount,
-// childCount,
-// currency,
-// guestNationality,
-// checkInDate,
-// checkOutDate,
-// CountryCode,
+// hotelId,             id
+// adultCount,          maxAdult
+// childCount,          maxChildren
+// currency,            usd
+// guestNationality,  -- country caps
+// checkInDate,   --    formatted
+// checkOutDate, --     formatted
+// CountryCode, --      country
+// cityName,    --      city
+// latitude,    --      lat
+// longitude,   --      long
 
-const HotelRooms = ({ item, strongTagText, formattedDates, hotelDetail }) => {
+const HotelRooms = ({
+  item,
+  strongTagText,
+  formattedDates,
+  hotelDetail,
+  options,
+}) => {
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
+
   setId(hotelId);
+
+  const handleClick = (item) => {
+    const { roomName } = item;
+  };
+
+  console.log(formattedDates);
+  console.log(options);
+
+  const { location, city, country } = hotelDetail;
 
   const {
     roomName,
@@ -31,14 +50,6 @@ const HotelRooms = ({ item, strongTagText, formattedDates, hotelDetail }) => {
     maxChildren,
     roomAmenities,
   } = item;
-
-  const handleClick = (item) => {
-    console.log(item.id);
-    console.log(formattedDates);
-  };
-
-  const { location,city ,country} = hotelDetail;
-  console.log(location?.latitude, location?.longitude);
 
   return (
     <>

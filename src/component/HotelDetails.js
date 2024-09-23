@@ -17,6 +17,21 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
 
 const HotelDetails = () => {
+  const [openOptions, setOpenOptions] = useState(true);
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+  });
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? prev[name] + 1 : prev[name] - 1,
+      };
+    });
+  };
+
   const [selectedDates, setSelectedDates] = useState([
     dayjs(),
     dayjs().add(1, "day"),
@@ -47,7 +62,6 @@ const HotelDetails = () => {
     const formattedDate = dateObject.toISOString().split("T")[0];
     return formattedDate;
   };
-  console.log(formattedDates);
 
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
@@ -218,8 +232,8 @@ const HotelDetails = () => {
           </div>
         </div>
 
-        <div className="calendarBox px-24 mt-5">
-          <div className="calendar border-2 py-3 px-3 rounded-lg">
+        <div className="calendarBox px-24 mt-5 flex justify-center align-middle w-full gap-5">
+          <div className="calendar py-3 px-3 rounded-lg w-[100%] border-2">
             <div className="headerSearchItem border-2 py-3 rounded-lg bg-white px-10">
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
@@ -239,6 +253,55 @@ const HotelDetails = () => {
               </LocalizationProvider>
             </div>
           </div>
+          <div className="relative w-[50%] border-2 flex justify-center rounded-lg">
+            {openOptions && (
+              <div className="options mt-3 py-1 px-5">
+                {/* Adult Option */}
+                <div className="optionItem">
+                  <span className="optionText">Adult</span>
+                  <div className="optionCounter">
+                    <button
+                      disabled={options.adult <= 1}
+                      className="optionCounterButton"
+                      onClick={() => handleOption("adult", "d")}
+                    >
+                      -
+                    </button>
+                    <span className="optionCounterNumber">{options.adult}</span>
+                    <button
+                      className="optionCounterButton"
+                      onClick={() => handleOption("adult", "i")}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/* Children Option */}
+                <div className="optionItem">
+                  <span className="optionText">Children</span>
+                  <div className="optionCounter">
+                    <button
+                      disabled={options.children <= 0}
+                      className="optionCounterButton"
+                      onClick={() => handleOption("children", "d")}
+                    >
+                      -
+                    </button>
+                    <span className="optionCounterNumber">
+                      {options.children}
+                    </span>
+                    <button
+                      className="optionCounterButton"
+                      onClick={() => handleOption("children", "i")}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/** bOOK Hotel Rooms */}
@@ -251,6 +314,7 @@ const HotelDetails = () => {
                   item={item}
                   hotelDetail={hotelDetail}
                   formattedDates={formattedDates}
+                  options={options}
                   strongTagText={strongTagText}
                 />
               );
