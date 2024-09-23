@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
 import useHotelDetail from "../Hooks/useHotelDetail";
 import useHotelReview from "../Hooks/useHotelReview";
@@ -9,6 +9,7 @@ import { Divider, Rating } from "@mui/material";
 import HotelRooms from "./HotelRooms";
 import Testimonial from "./Testimonial";
 import HotelLocation from "./HotelLocation";
+import { Link, Element } from "react-scroll"; // Import from react-scroll
 
 const HotelDetails = () => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -67,14 +68,14 @@ const HotelDetails = () => {
                       className="rounded-xl w-full h-full"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-xl">
-                      <Link
+                      <RouterLink
                         to={"/MoreImages"}
                         style={{ textDecoration: "none" }}
                       >
                         <span className="text-white font-semibold">
                           MORE IMAGES
                         </span>
-                      </Link>
+                      </RouterLink>
                     </div>
                   </div>
                 </div>
@@ -143,9 +144,9 @@ const HotelDetails = () => {
                   </div>
                 </div>
                 <div className="review px-2 py-3 text-[#0077b6]">
-                  <link>
-                    <p className=" font-bold">All Reviews</p>
-                  </link>
+                  <Link to="testimonial" smooth={true} duration={500}>
+                    <p className=" font-bold cursor-pointer">All Reviews</p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -164,9 +165,11 @@ const HotelDetails = () => {
                     <h6>
                       {hotelDetail && hotelDetail?.address}, {hotelDetail?.city}
                     </h6>
-                    <link>
-                      <h6 className=" text-[#0077b6]">View On Map</h6>
-                    </link>
+                    <Link to="hotelLocation" smooth={true} duration={500}>
+                      <h6 className=" text-[#0077b6] cursor-pointer">
+                        View On Map
+                      </h6>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -197,13 +200,19 @@ const HotelDetails = () => {
         </div>
       </div>
 
-      <div className=" mt-5">
-        <HotelLocation />
-      </div>
+      {/** Hotel Location Section */}
+      <Element name="hotelLocation">
+        <div className="mt-5">
+          <HotelLocation />
+        </div>
+      </Element>
 
-      <div className=" my-5">
-        <Testimonial />
-      </div>
+      {/** Testimonial Section */}
+      <Element name="testimonial">
+        <div className="my-5">
+          <Testimonial />
+        </div>
+      </Element>
     </div>
   );
 };
