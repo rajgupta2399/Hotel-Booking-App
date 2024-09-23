@@ -47,7 +47,6 @@ const HotelDetails = () => {
     const formattedDate = dateObject.toISOString().split("T")[0];
     return formattedDate;
   };
-
   console.log(formattedDates);
 
   const { id, setId } = useContext(HotelDetailsId);
@@ -250,6 +249,8 @@ const HotelDetails = () => {
                 <HotelRooms
                   key={index}
                   item={item}
+                  hotelDetail={hotelDetail}
+                  formattedDates={formattedDates}
                   strongTagText={strongTagText}
                 />
               );

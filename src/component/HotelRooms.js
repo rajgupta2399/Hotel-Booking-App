@@ -9,14 +9,19 @@ import { Link } from "react-router-dom";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import Testimonial from "./Testimonial";
 
-const HotelRooms = ({ item, strongTagText }) => {
+// hotelId,
+// adultCount,
+// childCount,
+// currency,
+// guestNationality,
+// checkInDate,
+// checkOutDate,
+// CountryCode,
+
+const HotelRooms = ({ item, strongTagText, formattedDates, hotelDetail }) => {
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
   setId(hotelId);
-  useHotelDetail();
-  useHotelReview();
-  const hotelReview = useSelector((store) => store.hotelReview.hotelReview);
-  const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
 
   const {
     roomName,
@@ -28,8 +33,12 @@ const HotelRooms = ({ item, strongTagText }) => {
   } = item;
 
   const handleClick = (item) => {
-    // console.log(item.id);
+    console.log(item.id);
+    console.log(formattedDates);
   };
+
+  const { location,city ,country} = hotelDetail;
+  console.log(location?.latitude, location?.longitude);
 
   return (
     <>
@@ -168,7 +177,6 @@ const HotelRooms = ({ item, strongTagText }) => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };
