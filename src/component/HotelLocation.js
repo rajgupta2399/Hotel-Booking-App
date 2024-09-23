@@ -5,7 +5,6 @@ import useHotelDetail from "../Hooks/useHotelDetail";
 const HotelLocation = () => {
   useHotelDetail();
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
-  console.log(hotelDetail);
 
   return (
     <div>

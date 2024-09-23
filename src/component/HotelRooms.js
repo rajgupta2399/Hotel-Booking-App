@@ -28,7 +28,7 @@ const HotelRooms = ({ item, strongTagText }) => {
   } = item;
 
   const handleClick = (item) => {
-    console.log(item.id);
+    // console.log(item.id);
   };
 
   return (

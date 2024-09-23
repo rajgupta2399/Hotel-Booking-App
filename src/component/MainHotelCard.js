@@ -22,7 +22,6 @@ const MainHotelCard = ({ item }) => {
   } = item;
 
   //   const country = useSelector((store) => store.country.CountryHotelCode);
-  // console.log(item);
   const strongTagText =
     hotelDescription
       .match(/<strong>(.*?)<\/strong>/g)

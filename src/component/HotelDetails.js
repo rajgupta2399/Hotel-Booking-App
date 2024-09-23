@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
 import useHotelDetail from "../Hooks/useHotelDetail";
@@ -10,18 +10,52 @@ import HotelRooms from "./HotelRooms";
 import Testimonial from "./Testimonial";
 import HotelLocation from "./HotelLocation";
 import { Link, Element } from "react-scroll"; // Import from react-scroll
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import dayjs from "dayjs";
 
 const HotelDetails = () => {
+  const [selectedDates, setSelectedDates] = useState([
+    dayjs(),
+    dayjs().add(1, "day"),
+  ]);
+  const [formattedDates, setFormattedDates] = useState([]);
+
+  useEffect(() => {
+    if (selectedDates.length === 2) {
+      const formattedStartDate = formatDateString(selectedDates[0]);
+      const formattedEndDate = formatDateString(selectedDates[1]);
+      setFormattedDates([formattedStartDate, formattedEndDate]);
+    }
+  }, [selectedDates]);
+
+  const handleDateChange = (newDates) => {
+    // If only one date is selected, set the end date to the next day
+    if (newDates.length === 1) {
+      const startDate = newDates[0];
+      const endDate = startDate.add(1, "day");
+      setSelectedDates([startDate, endDate]);
+    } else {
+      setSelectedDates(newDates);
+    }
+  };
+
+  const formatDateString = (dateString) => {
+    const dateObject = new Date(dateString);
+    const formattedDate = dateObject.toISOString().split("T")[0];
+    return formattedDate;
+  };
+
+  console.log(formattedDates);
+
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
   setId(hotelId);
   useHotelDetail();
   useHotelReview();
-  const hotelReview = useSelector((store) => store.hotelReview.hotelReview);
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
-  // console.log(hotelReview);
-  // console.log(hotelDetail);
-
   const strongTagText =
     hotelDetail?.hotelDescription
       .match(/<strong>(.*?)<\/strong>/g)
@@ -185,8 +219,31 @@ const HotelDetails = () => {
           </div>
         </div>
 
+        <div className="calendarBox px-24 mt-5">
+          <div className="calendar border-2 py-3 px-3 rounded-lg">
+            <div className="headerSearchItem border-2 py-3 rounded-lg bg-white px-10">
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                sx={{ bgcolor: "white", color: "black" }}
+              >
+                <DemoContainer
+                  components={["DateRangePicker"]}
+                  sx={{ bgcolor: "white", color: "black" }}
+                >
+                  <DateRangePicker
+                    localeText={{ start: "Check-in", end: "Check-out" }}
+                    sx={{ bgcolor: "white", color: "black" }} // Set background and text color
+                    value={selectedDates}
+                    onChange={handleDateChange}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </div>
+          </div>
+        </div>
+
         {/** bOOK Hotel Rooms */}
-        <div className="hotelRoom py-5">
+        <div className="hotelRoom pb-5">
           {hotelDetail &&
             hotelDetail?.rooms.map((item, index) => {
               return (

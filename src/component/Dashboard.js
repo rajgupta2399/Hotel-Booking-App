@@ -19,7 +19,6 @@ export default function Dashboard() {
   const { country, setCountry } = useContext(CountryCoordinates);
   const { city, setCity } = useContext(CityCoordinates);
 
-  // console.log(fac);
 
   return (
     <>
