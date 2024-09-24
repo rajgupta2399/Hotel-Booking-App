@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
 import SkeletonContainer from "./SkeletonContainer";
+import DummyComponent from "./DummyComponent";
 
 const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -52,10 +53,10 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
 
   // console.log(checkInDate);
   // console.log(checkOutDate);
-  console.log(occupancies);
+  // console.log(occupancies);
 
   const handleClick = (item) => {
-    console.log(item.roomName)
+    console.log(item.roomName);
   };
 
   return (
@@ -175,13 +176,23 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
         ) : (
           <div className="text-center mt-10">
             <div className="skeleton">
-              <SkeletonContainer/>
-              <SkeletonContainer/>
-              <SkeletonContainer/>
+              <SkeletonContainer />
+              <SkeletonContainer />
+              <SkeletonContainer />
             </div>
           </div>
         )}
       </div>
+
+      <DummyComponent
+        hotelId={hotelId}
+        occupancies={occupancies}
+        memoizedCountry={memoizedCountry}
+        memoizedLocation={memoizedLocation}
+        checkInDate={checkInDate}
+        checkOutDate={checkOutDate}
+        city={city}
+      />
     </>
   );
 };

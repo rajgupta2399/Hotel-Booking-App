@@ -19,7 +19,7 @@ import dayjs from "dayjs";
 const HotelDetails = () => {
   const [openOptions, setOpenOptions] = useState(true);
   const [options, setOptions] = useState({
-    adult: 1,
+    adult: 2,
     children: 1,
   });
 
@@ -261,7 +261,7 @@ const HotelDetails = () => {
                   <span className="optionText">Adult</span>
                   <div className="optionCounter">
                     <button
-                      disabled={options.adult <= 1}
+                      disabled={options.adult <= 2}
                       className="optionCounterButton"
                       onClick={() => handleOption("adult", "d")}
                     >

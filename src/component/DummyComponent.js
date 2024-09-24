@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
 
-const DummyComponent = () => {
+const DummyComponent = ({
+  hotelId,
+  occupancies,
+  memoizedCountry,
+  memoizedLocation,
+  checkInDate,
+  checkOutDate,
+  city,
+}) => {
   useEffect(() => {
     const options = {
       method: "POST",
@@ -10,16 +18,24 @@ const DummyComponent = () => {
         "X-API-Key": "sand_3cb42e87-dee1-4083-9436-11f7cb4bc2f1",
       },
       body: JSON.stringify({
-        hotelIds: ["lp1897"],
-        occupancies: [{ adults: 2, children: [1] }],
+        hotelIds: [hotelId] ? [hotelId] : "lp1b578",
+        occupancies: occupancies ? occupancies : [{ adults: 2, children: [1] }],
         currency: "USD",
-        guestNationality: "US",
-        checkin: "2024-12-30",
-        checkout: "2024-12-31",
-        countryCode: "US",
-        cityName: "New York",
-        latitude: 34.052235,
-        longitude: -118.243683,
+        guestNationality: memoizedCountry?.guestNationality
+          ? memoizedCountry?.guestNationality
+          : "US",
+        checkin: checkInDate ? checkInDate : "2024-12-30",
+        checkout: checkOutDate ? checkOutDate : "2024-12-31",
+        countryCode: memoizedCountry?.countryCode
+          ? memoizedCountry?.countryCode
+          : "US",
+        cityName: city ? city : "New York",
+        latitude: memoizedLocation?.latitude
+          ? memoizedLocation?.latitude
+          : 34.052235,
+        longitude: memoizedLocation?.longitude
+          ? memoizedLocation?.longitude
+          : -118.243683,
       }),
     };
 
@@ -32,10 +48,37 @@ const DummyComponent = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data); // Log the response data
+        if (data && data?.data) {
+          // If data is available, log it
+          console.log("Available data:", data?.data);
+          // If data is available, show an alert
+          alert("Data is available");
+        } else {
+          // If no data is available, log an error message
+          console.log({
+            error: {
+              code: 2001,
+              message: "no availability found",
+            },
+          });
+
+          alert("Data is not available");
+
+        }
       })
-      .catch((err) => console.error("Fetch error:", err));
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+      .catch((err) => {
+        // Log any fetch errors
+        console.error("Fetch error:", err);
+      });
+  }, [
+    hotelId,
+    occupancies,
+    memoizedCountry,
+    memoizedLocation,
+    checkInDate,
+    checkOutDate,
+    city,
+  ]);
 
   return (
     <div>
