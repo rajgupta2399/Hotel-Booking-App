@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
 import useHotelDetail from "../Hooks/useHotelDetail";
@@ -7,40 +7,124 @@ import { useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import { Link } from "react-router-dom";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import Testimonial from "./Testimonial";
+import useHotelRates from "../Hooks/useHotelRates";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import dayjs from "dayjs";
 
-// hotelId,             id
-// adultCount,          maxAdult
-// childCount,          maxChildren
-// currency,            usd
-// guestNationality,  -- country caps
-// checkInDate,   --    formatted
-// checkOutDate, --     formatted
-// CountryCode, --      country
-// cityName,    --      city
-// latitude,    --      lat
-// longitude,   --      long
+const HotelRooms = ({ item, strongTagText }) => {
+  const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
 
-const HotelRooms = ({
-  item,
-  strongTagText,
-  formattedDates,
-  hotelDetail,
-  options,
-}) => {
+  const [openOptions, setOpenOptions] = useState(true);
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+  });
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? prev[name] + 1 : prev[name] - 1,
+      };
+    });
+  };
+
+  const [selectedDates, setSelectedDates] = useState([
+    dayjs(),
+    dayjs().add(1, "day"),
+  ]);
+  const [formattedDates, setFormattedDates] = useState([]);
+
+  useEffect(() => {
+    if (selectedDates.length === 2) {
+      const formattedStartDate = formatDateString(selectedDates[0]);
+      const formattedEndDate = formatDateString(selectedDates[1]);
+      setFormattedDates([formattedStartDate, formattedEndDate]);
+    }
+  }, [selectedDates]);
+
+  const handleDateChange = (newDates) => {
+    // If only one date is selected, set the end date to the next day
+    if (newDates.length === 1) {
+      const startDate = newDates[0];
+      const endDate = startDate.add(1, "day");
+      setSelectedDates([startDate, endDate]);
+    } else {
+      setSelectedDates(newDates);
+    }
+  };
+
+  const formatDateString = (dateString) => {
+    const dateObject = new Date(dateString);
+    const formattedDate = dateObject.toISOString().split("T")[0];
+    return formattedDate;
+  };
+
+  const location = hotelDetail?.location;
+  const city = hotelDetail?.city;
+  const country = hotelDetail?.country;
+
+  const occupancies = useMemo(
+    () => [
+      {
+        adults: options.adult,
+        children: [options.children > 0 ? options.children : 1],
+      },
+    ],
+    [options]
+  );
+
+  const memoizedFormattedDates = useMemo(
+    () => formattedDates,
+    [formattedDates]
+  );
+
+  const checkInDate = memoizedFormattedDates[0];
+  const checkOutDate = memoizedFormattedDates[1];
+
+  console.log(checkInDate);
+  console.log(checkOutDate);
+
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
-
+  // setId(hotelId);
   setId(hotelId);
+
+  const memoizedLocation = useMemo(() => {
+    return {
+      latitude: location?.latitude,
+      longitude: location?.longitude,
+    };
+  }, [location]);
+
+  const memoizedCountry = useMemo(() => {
+    return {
+      guestNationality: country?.toUpperCase(),
+      countryCode: country?.toUpperCase(),
+    };
+  }, [country]);
+
+  // const { rates, loading, error } = useHotelRates(
+  //   [hotelId], // hotelIds
+  //   occupancies, // occupancies
+  //   checkInDate, // checkin
+  //   checkOutDate, // checkout
+  //   memoizedCountry.countryCode, // countryCode (memoized)
+  //   city, // cityName
+  //   memoizedLocation.latitude, // latitude (memoized)
+  //   memoizedLocation.longitude, // longitude (memoized)
+  //   memoizedCountry.guestNationality // guestNationality (memoized)
+  // );
+
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   const handleClick = (item) => {
     const { roomName } = item;
   };
-
-  console.log(formattedDates);
-  console.log(options);
-
-  const { location, city, country } = hotelDetail;
 
   const {
     roomName,
