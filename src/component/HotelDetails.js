@@ -20,7 +20,7 @@ const HotelDetails = () => {
   const [openOptions, setOpenOptions] = useState(true);
   const [options, setOptions] = useState({
     adult: 1,
-    children: 0,
+    children: 1,
   });
 
   const handleOption = (name, operation) => {
@@ -282,7 +282,7 @@ const HotelDetails = () => {
                   <span className="optionText">Children</span>
                   <div className="optionCounter">
                     <button
-                      disabled={options.children <= 0}
+                      disabled={options.children <= 1}
                       className="optionCounterButton"
                       onClick={() => handleOption("children", "d")}
                     >

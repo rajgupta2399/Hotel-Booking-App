@@ -9,6 +9,7 @@ import useCityHotel from "../Hooks/useCityHotel";
 import useHotelFacility from "../Hooks/useHotelFacility";
 import BottomFooter from "./Footer";
 import Testimonial from "./Testimonial";
+import DummyComponent from "./DummyComponent";
 
 export default function Dashboard() {
   useCountryCodeHotel();
@@ -43,22 +44,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-
-      {/**
-      <div className="px-24">
-        {Country && Country.length > 0 ? (
-          <div className="flex flex-wrap gap-5">
-            {Country.map((item, index) => (
-              <div key={item.id || index}>
-                <HotelCard item={item} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No hotels available to display in the list.</p>
-        )}
-      </div>
-      */}
+      <DummyComponent/>
     </>
   );
 }

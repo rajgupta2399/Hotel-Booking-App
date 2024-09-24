@@ -13,6 +13,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvid
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
+import SkeletonContainer from "./SkeletonContainer";
 
 const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -51,33 +52,34 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
 
   // console.log(checkInDate);
   // console.log(checkOutDate);
-  // console.log(occupancies);
+  console.log(occupancies);
 
-  const handleClick = (item) => {};
+  const handleClick = (item) => {
+    console.log(item.roomName)
+  };
 
   return (
     <>
-      <div className=" text-white px-24">
-        {hotelDetail &&
-          hotelDetail?.rooms.length &&
-          hotelDetail?.rooms.map((item, index) => (
+      <div className="text-white px-24">
+        {hotelDetail && hotelDetail.rooms.length > 0 ? (
+          hotelDetail.rooms.map((item, index) => (
             <div
-              className="centeralContainer mt-5  border-2 rounded-lg bg-[#14181B]"
+              className="centeralContainer mt-5 border-2 rounded-lg bg-[#14181B]"
               key={index}
             >
-              {/** bOOK Hotel Rooms */}
+              {/** Book Hotel Rooms */}
               <div className="imageBox">
                 <div className="images flex w-full">
                   <div className="flex gap-2 flex-row border-2 px-4 py-3 my-2 mx-2 rounded-lg w-[70%]">
-                    <div className=" w-[490px] rounded-lg ">
+                    <div className="w-[490px] rounded-lg">
                       <img
                         src={item?.photos?.[0]?.url}
                         alt=""
                         className="rounded-xl object-cover"
                       />
                     </div>
-                    <div className=" flex flex-col gap-2">
-                      <div className=" w-[238px] rounded-lg h-[160px]">
+                    <div className="flex flex-col gap-2">
+                      <div className="w-[238px] rounded-lg h-[160px]">
                         <img
                           src={
                             item?.photos?.[1]?.url
@@ -85,7 +87,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                               : "https://images.unsplash.com/photo-1667125095636-dce94dcbdd96?q=80&w=2052&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                           }
                           alt=""
-                          className=" rounded-xl object-cover w-full h-full"
+                          className="rounded-xl object-cover w-full h-full"
                         />
                       </div>
                       <div className="relative w-[238px] h-[160px] rounded-lg">
@@ -111,10 +113,10 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                       </div>
                     </div>
                   </div>
-                  <div className=" w-[30%] border-2 py-3 my-2 mr-2 rounded-lg">
-                    <div className="hotelDetails  h-full">
+                  <div className="w-[30%] border-2 py-3 my-2 mr-2 rounded-lg">
+                    <div className="hotelDetails h-full">
                       <div className="hotelName">
-                        <h6 className=" text-[18px] text-center py-2 px-3">
+                        <h6 className="text-[18px] text-center py-2 px-3">
                           {item?.roomName}
                         </h6>
                       </div>
@@ -123,14 +125,13 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                           {item?.description}
                         </h6>
                       </div>
-
                       <div className="cap px-4">
                         <div>
                           <h6 className="text-sm text-white">
-                            MaxAdults : {item?.maxAdults}
+                            Max Adults: {item?.maxAdults}
                           </h6>
                           <h6 className="text-sm text-white">
-                            MaxChildren : {item?.maxChildren}
+                            Max Children: {item?.maxChildren}
                           </h6>
                         </div>
                       </div>
@@ -143,29 +144,23 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                 <div className="marquee">
                   <div className="text px-2 py-2">
                     <h6 className="text-[#0077b6] text-md px-4 text-[18px]">
-                      Room Ameneities
+                      Room Amenities
                     </h6>
                   </div>
                   <div className="marquee-content">
-                    <ul className=" text-white flex justify-between flex-wrap gap-3 px-7">
-                      {item?.roomAmenities
-                        .slice(0, 30)
-                        .map((amenity, index) => (
-                          <li
-                            key={amenity.amenitiesId}
-                            className=" font-semibold"
-                          >
-                            <FiberManualRecordIcon className=" px-1 text-green-500 mb-1" />
-
-                            {amenity.name}
-                          </li>
-                        ))}
+                    <ul className="text-white flex justify-between flex-wrap gap-3 px-7">
+                      {item?.roomAmenities.slice(0, 30).map((amenity) => (
+                        <li key={amenity.amenitiesId} className="font-semibold">
+                          <FiberManualRecordIcon className="px-1 text-green-500 mb-1" />
+                          {amenity.name}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div className=" mt-3 mb-4">
+              <div className="mt-3 mb-4">
                 <div className="w-[100%] flex justify-center">
                   <button
                     className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-[30%]"
@@ -176,7 +171,16 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="text-center mt-10">
+            <div className="skeleton">
+              <SkeletonContainer/>
+              <SkeletonContainer/>
+              <SkeletonContainer/>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
