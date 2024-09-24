@@ -306,19 +306,29 @@ const HotelDetails = () => {
 
         {/** bOOK Hotel Rooms */}
         <div className="hotelRoom pb-5">
-          {hotelDetail &&
-            hotelDetail?.rooms.map((item, index) => {
-              return (
-                <HotelRooms
-                  key={index}
-                  item={item}
-                  hotelDetail={hotelDetail}
-                  formattedDates={formattedDates}
-                  options={options}
-                  strongTagText={strongTagText}
-                />
-              );
-            })}
+          {hotelDetail && hotelDetail?.rooms && hotelDetail?.rooms.length > 0 ? (
+            <>
+              {hotelDetail?.rooms.map((item, index) => {
+                return (
+                  <HotelRooms
+                    key={index}
+                    item={item}
+                    strongTagText={strongTagText} // Room-specific strong tag text
+                  />
+                );
+              })}
+
+              {/* Render HotelRooms with static props only once */}
+              <HotelRooms
+                formattedDates={formattedDates}
+                hotelDetail={hotelDetail}
+                options={options}
+                // You can pass more static props if needed
+              />
+            </>
+          ) : (
+            <div>No rooms available</div>
+          )}
         </div>
       </div>
 
