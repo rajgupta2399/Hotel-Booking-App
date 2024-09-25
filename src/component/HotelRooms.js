@@ -184,15 +184,25 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
         )}
       </div>
 
-      <DummyComponent
-        hotelId={hotelId}
-        occupancies={occupancies}
-        memoizedCountry={memoizedCountry}
-        memoizedLocation={memoizedLocation}
-        checkInDate={checkInDate}
-        checkOutDate={checkOutDate}
-        city={city}
-      />
+      {hotelDetail && hotelDetail.rooms.length > 0 ? (
+        <DummyComponent
+          hotelId={hotelId}
+          occupancies={occupancies}
+          memoizedCountry={memoizedCountry}
+          memoizedLocation={memoizedLocation}
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+          city={city}
+        />
+      ) : (
+        <div className="text-center mt-10">
+          <div className="skeleton">
+            <SkeletonContainer />
+            <SkeletonContainer />
+            <SkeletonContainer />
+          </div>
+        </div>
+      )}
     </>
   );
 };
