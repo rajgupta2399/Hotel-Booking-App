@@ -78,8 +78,6 @@ const HotelDetails = () => {
       .match(/<strong>(.*?)<\/strong>/g)
       ?.map((tag) => tag.replace(/<\/?strong>/g, "")) || [];
 
-  console.log(hotelDetail);
-
   if (loading) {
     return (
       <div className=" my-14 mx-32">
