@@ -6,13 +6,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import SkeletonContainer from "./SkeletonContainer";
 import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
+import useHotelReview from "../Hooks/useHotelReview";
 
 const TestimonialCard = ({ item }) => (
   <div className="flex flex-col overflow-hidden shadow-xl bg-[#14181B] rounded-lg p-6 mb-5">
     <div className="flex-1">
       <div className="flex  justify-between">
         <span className="text-white">{item.date}</span>
-        <span className="mt-0.5 text-sm text-gray-400 capitalize">{item.type}</span>
+        <span className="mt-0.5 text-sm text-gray-400 capitalize">
+          {item.type}
+        </span>
       </div>
 
       <blockquote className="flex-1 mt-8">
@@ -39,6 +42,7 @@ const TestimonialCard = ({ item }) => (
 );
 
 const Testimonial = () => {
+  useHotelReview();
   const hotelReview = useSelector((store) => store.hotelReview.hotelReview);
 
   return (

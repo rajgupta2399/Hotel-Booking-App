@@ -30,8 +30,8 @@ function App() {
   return (
     <div className="bg-[#1d232a]">
       <Provider store={store}>
-        <HotelDetailsId.Provider value={{ id, setId }}>
-          <CountryCoordinates.Provider value={{ country, setCountry }}>
+        <CountryCoordinates.Provider value={{ country, setCountry }}>
+          <HotelDetailsId.Provider value={{ id, setId }}>
             <CityCoordinates.Provider value={{ city, setCity }}>
               <AuthProvider>
                 {currentUser ? <Header /> : null}
@@ -40,8 +40,8 @@ function App() {
                 {currentUser ? <BottomFooter /> : null}
               </AuthProvider>
             </CityCoordinates.Provider>
-          </CountryCoordinates.Provider>
-        </HotelDetailsId.Provider>
+          </HotelDetailsId.Provider>
+        </CountryCoordinates.Provider>
       </Provider>
     </div>
   );

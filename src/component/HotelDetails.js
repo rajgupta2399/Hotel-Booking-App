@@ -15,8 +15,18 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvid
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
+import SkeletonContainer from "./SkeletonContainer";
+import NewSkeletonContainer from "./NewSkeletonContainer";
 
 const HotelDetails = () => {
+  useHotelDetail();
+  useHotelReview();
+  const { id, setId } = useContext(HotelDetailsId);
+  const { hotelId } = useParams();
+  setId(hotelId);
+  const { loading, error } = useHotelDetail();
+  const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
+
   const [openOptions, setOpenOptions] = useState(true);
   const [options, setOptions] = useState({
     adult: 2,
@@ -63,16 +73,31 @@ const HotelDetails = () => {
     return formattedDate;
   };
 
-  const { id, setId } = useContext(HotelDetailsId);
-  const { hotelId } = useParams();
-  setId(hotelId);
-  useHotelDetail();
-  useHotelReview();
-  const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
   const strongTagText =
     hotelDetail?.hotelDescription
       .match(/<strong>(.*?)<\/strong>/g)
       ?.map((tag) => tag.replace(/<\/?strong>/g, "")) || [];
+
+  console.log(hotelDetail);
+
+  if (loading) {
+    return (
+      <div className=" my-14 mx-32">
+        <div className=" flex gap-3 my-5">
+          <NewSkeletonContainer />
+          <SkeletonContainer />
+        </div>
+        <div className=" flex gap-3 my-5">
+          <NewSkeletonContainer />
+          <SkeletonContainer />
+        </div>
+        <div className=" flex gap-3 my-5">
+          <NewSkeletonContainer />
+          <SkeletonContainer />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className=" bg-[#1D232A] text-white px-24">
@@ -306,7 +331,9 @@ const HotelDetails = () => {
 
         {/** bOOK Hotel Rooms */}
         <div className="hotelRoom pb-5">
-          {hotelDetail && hotelDetail?.rooms && hotelDetail?.rooms.length > 0 ? (
+          {hotelDetail &&
+          hotelDetail?.rooms &&
+          hotelDetail?.rooms.length > 0 ? (
             <>
               {hotelDetail?.rooms.map((item, index) => {
                 return (
