@@ -15,6 +15,7 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
 import SkeletonContainer from "./SkeletonContainer";
 import DummyComponent from "./DummyComponent";
+import store from "../store/store";
 
 const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -22,6 +23,8 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   setId(hotelId);
 
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
+  const hotelRoom = useSelector((store) => store.hotelRoom.hotelRoom);
+
 
   if (!options || !formattedDates) {
     return null; // Prevent rendering until the data is available
