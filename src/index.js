@@ -9,9 +9,11 @@ import { ChakraBaseProvider } from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-      <AuthProvider>
-        <RouterProvider router={appRouter}>
-          <App />
-        </RouterProvider>
-      </AuthProvider>
+  <React.StrictMode>
+    <AuthProvider>
+      <RouterProvider router={appRouter}>
+        <App />
+      </RouterProvider>
+    </AuthProvider>
+  </React.StrictMode>
 );
