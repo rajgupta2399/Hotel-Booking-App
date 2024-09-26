@@ -8,7 +8,7 @@ const HotleRoomSlice = createSlice({
   reducers: {
     addHotelRoom: (state, action) => {
       state.hotelRoom = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
     },
   },
 });

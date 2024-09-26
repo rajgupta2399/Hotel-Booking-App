@@ -1,21 +1,11 @@
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
-import useHotelDetail from "../Hooks/useHotelDetail";
-import useHotelReview from "../Hooks/useHotelReview";
 import { useSelector } from "react-redux";
-import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import { Link } from "react-router-dom";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import useHotelRates from "../Hooks/useHotelRates";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import dayjs from "dayjs";
 import SkeletonContainer from "./SkeletonContainer";
 import DummyComponent from "./DummyComponent";
-import store from "../store/store";
 
 const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   const { id, setId } = useContext(HotelDetailsId);
@@ -23,8 +13,18 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   setId(hotelId);
 
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
-  const hotelRoom = useSelector((store) => store.hotelRoom.hotelRoom);
+  const hotelReview = useSelector((store) => store.hotelReview.hotelReview);
 
+  const hotelRoom = useSelector((store) => store.hotelRoom.hotelRoom);
+  console.log(hotelRoom);
+  
+  if (hotelRoom?.error) {
+    console.log("Error Message:", hotelRoom.error.message);
+  }
+
+  // if (hotelRoom[0]?.roomTypes) {
+  //   console.log("Room Types:", hotelRoom[0].roomTypes);
+  // }
 
   if (!options || !formattedDates) {
     return null; // Prevent rendering until the data is available
