@@ -47,15 +47,21 @@ const HotelDetails = () => {
     dayjs().add(1, "day"),
   ]);
   const [formattedDates, setFormattedDates] = useState([]);
-
+  
+  // Function to format the date from dayjs object
+  const formatDateString = (date) => {
+    return date.format("YYYY-MM-DD"); // Use dayjs to format
+  };
+  
   useEffect(() => {
+    // Set formatted dates when selected dates change
     if (selectedDates.length === 2) {
       const formattedStartDate = formatDateString(selectedDates[0]);
       const formattedEndDate = formatDateString(selectedDates[1]);
       setFormattedDates([formattedStartDate, formattedEndDate]);
     }
   }, [selectedDates]);
-
+  
   const handleDateChange = (newDates) => {
     // If only one date is selected, set the end date to the next day
     if (newDates.length === 1) {
@@ -66,12 +72,8 @@ const HotelDetails = () => {
       setSelectedDates(newDates);
     }
   };
-
-  const formatDateString = (dateString) => {
-    const dateObject = new Date(dateString);
-    const formattedDate = dateObject.toISOString().split("T")[0];
-    return formattedDate;
-  };
+  
+  // console.log("Current Formatted Dates:", formattedDates);
 
   const strongTagText =
     hotelDetail?.hotelDescription

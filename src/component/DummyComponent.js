@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addHotelRoom } from "../store/HotelRoomSlice";
 
@@ -13,13 +13,16 @@ const DummyComponent = ({
 }) => {
   const dispatch = useDispatch();
   const [isFetchingData, setIsFetchingData] = useState(false);
+  const prevCheckInDateRef = useRef(checkInDate);
+  const prevCheckOutDateRef = useRef(checkOutDate);
+  const prevOccupanciesRef = useRef(occupancies);
+  const prevMemoizedCountryRef = useRef(memoizedCountry);
+  const prevMemoizedLocationRef = useRef(memoizedLocation);
+  const prevCityRef = useRef(city);
 
-  const fetchData = async (
-    currentCheckInDate,
-    currentCheckOutDate,
-    currentOccupancies
-  ) => {
+  const fetchData = async () => {
     if (isFetchingData) return; // Prevent unnecessary fetches
+
     setIsFetchingData(true); // Set fetching state
 
     const options = {
@@ -31,15 +34,13 @@ const DummyComponent = ({
       },
       body: JSON.stringify({
         hotelIds: hotelId ? [hotelId] : "lp1b578",
-        occupancies: currentOccupancies
-          ? currentOccupancies
-          : [{ adults: 2, children: [1] }],
+        occupancies: occupancies ? occupancies : [{ adults: 2, children: [1] }],
         currency: "USD",
         guestNationality: memoizedCountry?.guestNationality
           ? memoizedCountry?.guestNationality
           : "US",
-        checkin: currentCheckInDate, // Use the current values passed to the function
-        checkout: currentCheckOutDate, // Use the current values passed to the function
+        checkin: checkInDate,
+        checkout: checkOutDate,
         countryCode: memoizedCountry?.countryCode
           ? memoizedCountry?.countryCode
           : "US",
@@ -61,19 +62,18 @@ const DummyComponent = ({
       const data = await response.json();
 
       if (data && data?.data) {
-        alert("Data is available");
+        // alert("Hotel Room Availabel")
         dispatch(addHotelRoom(data?.data)); // Dispatch action if data is available
       } else {
         dispatch(
           addHotelRoom({
             error: {
               code: 2001,
-              message:
-                "No Hotel Room Available at this Date and Occupancies..!! Choose Another Date and Occupancies",
+              message: "no availability found",
             },
           })
         );
-        alert("Data is not available");
+        // alert("Data is not available");
       }
     } catch (err) {
       console.error("Fetch error:", err);
@@ -83,9 +83,23 @@ const DummyComponent = ({
   };
 
   useEffect(() => {
-    // Directly pass the current props to the fetchData function
-    fetchData(checkInDate, checkOutDate, occupancies);
-  }, [checkInDate, checkOutDate, occupancies]); // Only run this effect when these values change
+    if (
+      checkInDate !== prevCheckInDateRef.current ||
+      checkOutDate !== prevCheckOutDateRef.current ||
+      occupancies !== prevOccupanciesRef.current ||
+      memoizedCountry !== prevMemoizedCountryRef.current ||
+      memoizedLocation !== prevMemoizedLocationRef.current ||
+      city !== prevCityRef.current
+    ) {
+      fetchData();
+      prevCheckInDateRef.current = checkInDate;
+      prevCheckOutDateRef.current = checkOutDate;
+      prevOccupanciesRef.current = occupancies;
+      prevMemoizedCountryRef.current = memoizedCountry;
+      prevMemoizedLocationRef.current = memoizedLocation;
+      prevCityRef.current = city;
+    }
+  }, [checkInDate, checkOutDate, occupancies]);
 
   return <div></div>; // Replace with actual content
 };
