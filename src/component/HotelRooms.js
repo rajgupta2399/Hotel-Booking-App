@@ -7,11 +7,13 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import SkeletonContainer from "./SkeletonContainer";
 import DummyComponent from "./DummyComponent";
 import NewSkeletonContainer from "./NewSkeletonContainer";
+import { useNavigate } from "react-router-dom";
 
 const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
   setId(hotelId);
+  const navigate = useNavigate();
 
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
   const hotelReview = useSelector((store) => store.hotelReview.hotelReview);
@@ -61,7 +63,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   // console.log(occupancies);
 
   const handleClick = (item) => {
-    console.log(item.roomName);
+    navigate("/PreBookHotelRoom", { state: { item } });
   };
 
   return (
@@ -174,7 +176,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                   <div className="w-[100%] flex justify-center">
                     <button
                       className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-[30%]"
-                      onClick={() => handleClick(item)}
+                      onClick={() => handleClick(item.roomName)}
                     >
                       Book Now
                     </button>
