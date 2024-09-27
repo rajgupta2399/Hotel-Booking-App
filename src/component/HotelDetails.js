@@ -3,7 +3,7 @@ import { Link as RouterLink, useParams } from "react-router-dom";
 import { HotelDetailsId } from "../context/ContextApi";
 import useHotelDetail from "../Hooks/useHotelDetail";
 import useHotelReview from "../Hooks/useHotelReview";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import { Divider, Rating } from "@mui/material";
 import HotelRooms from "./HotelRooms";
@@ -17,6 +17,7 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
 import SkeletonContainer from "./SkeletonContainer";
 import NewSkeletonContainer from "./NewSkeletonContainer";
+import { addToWishList } from "../store/wishListSlice";
 
 const HotelDetails = () => {
   useHotelDetail();
@@ -24,6 +25,7 @@ const HotelDetails = () => {
   const { id, setId } = useContext(HotelDetailsId);
   const { hotelId } = useParams();
   setId(hotelId);
+
   const { loading, error } = useHotelDetail();
   const hotelDetail = useSelector((store) => store.hotelDetail.hotelDetail);
 
@@ -82,11 +84,11 @@ const HotelDetails = () => {
       .match(/<strong>(.*?)<\/strong>/g)
       ?.map((tag) => tag.replace(/<\/?strong>/g, "")) || [];
 
+  const dispatch = useDispatch();
 
-    const handleWishlist = (item) =>{
-      console.log(item);
-      
-    }
+  const handleWishlist = (item) => {
+    dispatch(addToWishList(item));
+  };
 
   if (loading) {
     return (
