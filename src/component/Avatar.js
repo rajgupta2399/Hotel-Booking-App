@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const settings = ["Profile", "Account", "Logout"];
+const settings = ["Profile", "Account", "WishList", "Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -64,15 +64,21 @@ function ResponsiveAppBar() {
       >
         <MenuItem>
           <Typography sx={{ textAlign: "center" }}>
-            Email : {currentUser.email}
+            Email: {currentUser.email}
           </Typography>
         </MenuItem>
         {settings.map((setting) => (
           <MenuItem
             key={setting}
-            onClick={() =>
-              setting === "Logout" ? handleLogout() : handleCloseUserMenu()
-            }
+            onClick={() => {
+              if (setting === "Logout") {
+                handleLogout();
+              } else if (setting === "WishList") {
+                navigate("/Wishlist"); // Assuming you're using react-router-dom for navigation
+              } else {
+                handleCloseUserMenu();
+              }
+            }}
           >
             <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
           </MenuItem>

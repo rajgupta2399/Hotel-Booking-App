@@ -21,7 +21,7 @@ const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
 const Login = lazy(() => import("../src/component/Login"));
 const ForgotPassword = lazy(() => import("../src/component/ForgotPassword"));
-
+const WishList = lazy(() => import("../src/component/WishListPage"));
 // App component for layout and context provider
 function App() {
   const { currentUser } = useAuth();
@@ -99,6 +99,16 @@ export const appRouter = createBrowserRouter([
           <RequireAuth>
             <Suspense fallback={<div>Loading...</div>}>
               <MoreImages />
+            </Suspense>
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/Wishlist",
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<div>Loading...</div>}>
+              <WishList />
             </Suspense>
           </RequireAuth>
         ),

@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 import SkeletonContainer from "./SkeletonContainer";
 import NewSkeletonContainer from "./NewSkeletonContainer";
 import { addToWishList } from "../store/wishListSlice";
+import toast from "react-hot-toast";
 
 const HotelDetails = () => {
   useHotelDetail();
@@ -88,6 +89,7 @@ const HotelDetails = () => {
 
   const handleWishlist = (item) => {
     dispatch(addToWishList(item));
+    toast.success("Hotel Added To Wishlist")
   };
 
   if (loading) {
