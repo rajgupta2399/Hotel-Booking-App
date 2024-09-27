@@ -82,6 +82,12 @@ const HotelDetails = () => {
       .match(/<strong>(.*?)<\/strong>/g)
       ?.map((tag) => tag.replace(/<\/?strong>/g, "")) || [];
 
+
+    const handleWishlist = (item) =>{
+      console.log(item);
+      
+    }
+
   if (loading) {
     return (
       <div className=" my-14 mx-32">
@@ -251,8 +257,13 @@ const HotelDetails = () => {
 
             <div className="book flex justify-center mt-4 mb-5">
               <div className="bookdiv w-[50%] flex justify-center align-middle">
-                <button className=" text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-full">
-                  Book Now
+                <button
+                  className=" text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-full"
+                  onClick={() => {
+                    handleWishlist(hotelDetail);
+                  }}
+                >
+                  Add To Wishlist
                 </button>
               </div>
             </div>
