@@ -176,7 +176,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                   <div className="w-[100%] flex justify-center">
                     <button
                       className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-[30%]"
-                      onClick={() => handleClick(item.roomName)}
+                      onClick={() => handleClick(item)}
                     >
                       Book Now
                     </button>

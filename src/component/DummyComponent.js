@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
+import dayjs from "dayjs"; // Import dayjs for date manipulation
 import { addHotelRoom } from "../store/HotelRoomSlice";
 
 const DummyComponent = ({
@@ -19,6 +20,11 @@ const DummyComponent = ({
   const prevMemoizedCountryRef = useRef(memoizedCountry);
   const prevMemoizedLocationRef = useRef(memoizedLocation);
   const prevCityRef = useRef(city);
+
+  // Fallback for missing checkOutDate
+  const adjustedCheckOutDate = checkOutDate
+    ? checkOutDate
+    : dayjs(checkInDate).add(1, "day").format("YYYY-MM-DD"); // Ensure checkout is at least 1 day after checkin
 
   const fetchData = async () => {
     if (isFetchingData) return; // Prevent unnecessary fetches
@@ -40,7 +46,7 @@ const DummyComponent = ({
           ? memoizedCountry?.guestNationality
           : "US",
         checkin: checkInDate,
-        checkout: checkOutDate,
+        checkout: adjustedCheckOutDate, // Use adjustedCheckOutDate
         countryCode: memoizedCountry?.countryCode
           ? memoizedCountry?.countryCode
           : "US",
@@ -62,7 +68,6 @@ const DummyComponent = ({
       const data = await response.json();
 
       if (data && data?.data) {
-        // alert("Hotel Room Availabel")
         dispatch(addHotelRoom(data?.data)); // Dispatch action if data is available
       } else {
         dispatch(
@@ -73,7 +78,6 @@ const DummyComponent = ({
             },
           })
         );
-        // alert("Data is not available");
       }
     } catch (err) {
       console.error("Fetch error:", err);
@@ -93,7 +97,7 @@ const DummyComponent = ({
     ) {
       fetchData();
       prevCheckInDateRef.current = checkInDate;
-      prevCheckOutDateRef.current = checkOutDate;
+      prevCheckOutDateRef.current = adjustedCheckOutDate; // Update reference for adjusted date
       prevOccupanciesRef.current = occupancies;
       prevMemoizedCountryRef.current = memoizedCountry;
       prevMemoizedLocationRef.current = memoizedLocation;
