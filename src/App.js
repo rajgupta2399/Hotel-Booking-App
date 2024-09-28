@@ -17,6 +17,8 @@ import BottomFooter from "./component/Footer";
 import ErrorPage from "./component/ErrorPage";
 import MoreImages from "./component/MoreImages";
 import PreBookHotelRoom from "./component/PreBookHotelRoom";
+import Profile from "./component/Profile";
+import Checkout from "./component/Checkout";
 const Dashboard = lazy(() => import("../src/component/Dashboard"));
 const Signup = lazy(() => import("../src/component/Signup"));
 const Login = lazy(() => import("../src/component/Login"));
@@ -119,6 +121,26 @@ export const appRouter = createBrowserRouter([
           <RequireAuth>
             <Suspense fallback={<div>Loading...</div>}>
               <PreBookHotelRoom />
+            </Suspense>
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/Profile",
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Profile />
+            </Suspense>
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/Checkout",
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Checkout />
             </Suspense>
           </RequireAuth>
         ),

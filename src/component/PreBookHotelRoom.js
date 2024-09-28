@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PreBookHotelRoomCard from "./PreBookHotelRoomCard";
 
 const PreBookHotelRoom = () => {
@@ -64,7 +64,7 @@ const PreBookHotelRoom = () => {
 
       <div className="hotelRoomsdiv">
         {hotelRoom && hotelRoom[0]?.roomTypes.length > 0 ? (
-          <div className="rooms px-28 flex flex-wrap flex-row gap-5">
+          <div className="rooms px-28 flex flex-wrap flex-row gap-5 mb-5">
             {/* Use a Set to track unique room names */}
             {Array.from(
               new Set(

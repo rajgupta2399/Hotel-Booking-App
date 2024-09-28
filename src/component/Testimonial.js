@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import SkeletonContainer from "./SkeletonContainer";
-import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
+import { Navigation, Keyboard, Autoplay } from "swiper/modules";
 import useHotelReview from "../Hooks/useHotelReview";
 
 const TestimonialCard = ({ item }) => (

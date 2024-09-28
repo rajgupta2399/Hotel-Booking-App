@@ -75,6 +75,8 @@ function ResponsiveAppBar() {
                 handleLogout();
               } else if (setting === "WishList") {
                 navigate("/Wishlist"); // Assuming you're using react-router-dom for navigation
+              } else if (setting === "Profile") {
+                navigate("/Profile"); // Assuming you're using react-router-dom for navigation
               } else {
                 handleCloseUserMenu();
               }

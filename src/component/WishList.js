@@ -1,7 +1,5 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
-import CheckSharpIcon from "@mui/icons-material/CheckSharp";
-import { useSelector } from "react-redux";
 
 const WishList = ({ wishList }) => {
   return (
