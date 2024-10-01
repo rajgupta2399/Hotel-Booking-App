@@ -145,10 +145,10 @@ export default function Header() {
 
       {/** Header */}
 
-      <header className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px]">
+      <header className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px] border-2 border-red-600">
         <nav
           aria-label="Global"
-          className="mx-auto flex w-full items-center justify-between p-6 lg:px-8 text-white"
+          className="mx-auto flex w-full items-center justify-between p-6 lg:px-8 text-white "
         >
           <div className="flex lg:flex-1 gap-5">
             <Link to={"/Dashboard"} className="-m-1.5 p-1.5">
@@ -181,30 +181,33 @@ export default function Header() {
           <PopoverGroup className="hidden lg:flex lg:gap-x-12 ml-20 text-white pb-3.5">
             <Popover className="relative">
               <PopoverButton className="flex items-center gap-x-1 text-md font-semibold leading-0 text-white">
-                Product
+                <Link
+                  to="/Dashboard"
+                  className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
+                  style={styleCard}
+                >
+                  <i class="fa-solid fa-house px-2 pb-1 no-underline"></i>
+                  Dashboard
+                </Link>
               </PopoverButton>
             </Popover>
 
             <Link
-              to="/search"
+              to="/Wishlist"
               className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
               style={styleCard}
             >
-              <i className="fa-solid fa-magnifying-glass px-2 no-underline	"></i>
-              Search
+              <i class="fa-solid fa-heart px-2 no-underline"></i>
+              WishList
             </Link>
-            <a
-              href="#"
-              className="text-md font-semibold leading-0 text-white no-underline	"
+            <Link
+              to="/MyBooking"
+              className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
+              style={styleCard}
             >
-              Marketplace
-            </a>
-            <a
-              href="#"
-              className="text-md font-semibold leading-0 text-white no-underline	"
-            >
-              Company
-            </a>
+              <i class="fa-solid fa-bed px-2 no-underline"></i>
+              MyBookings
+            </Link>
           </PopoverGroup>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end pb-1">
             <a href="#" className="font-semibold leading-0 text-white">
@@ -218,22 +221,16 @@ export default function Header() {
           className="lg:hidden"
         >
           <div className="fixed inset-0 z-10" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-[#1D232A] px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <img
-                  alt=""
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  className="h-8 w-auto"
-                />
-              </a>
+              <Link to={"/Dashboard"} className="-m-1.5 p-1.5">
+                <img alt="" src={HOTEL_BOOKING_LOGO} className=" h-9 w-auto" />
+              </Link>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                className="-m-2.5 rounded-md p-2.5 text-white"
               >
-                <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="h-6 w-6" />
               </button>
             </div>
@@ -244,34 +241,39 @@ export default function Header() {
                     {({ open }) => (
                       <>
                         <Disclosure.Button
-                          className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7"
                           style={styleCard}
                         >
-                          <Link to="/" onClick={() => {}}>
-                            Home
+                          <Link
+                            to="/Dashboard"
+                            className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
+                            style={styleCard}
+                          >
+                            <i class="fa-solid fa-house px-2 pb-1 no-underline"></i>
+                            Dashboard
                           </Link>
                         </Disclosure.Button>
                       </>
                     )}
                   </Disclosure>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Features
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Marketplace
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Company
-                  </a>
+                  <div className="flex flex-col gap-3">
+                    <Link
+                      to="/Wishlist"
+                      className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
+                      style={styleCard}
+                    >
+                      <i class="fa-solid fa-heart px-2 no-underline"></i>
+                      WishList
+                    </Link>
+                    <Link
+                      to="/MyBooking"
+                      className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
+                      style={styleCard}
+                    >
+                      <i class="fa-solid fa-bed px-2 no-underline"></i>
+                      MyBookings
+                    </Link>
+                  </div>
                 </div>
                 <div className="py-6">
                   <a

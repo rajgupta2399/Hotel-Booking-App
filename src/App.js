@@ -32,7 +32,7 @@ function App() {
   const [city, setCity] = useState({ city: "Zürich" });
   const [id, setId] = useState({ id: "lp19c62" });
   return (
-    <div className="bg-[#1d232a]">
+    <div className="bg-[#1d232a] border-2 border-green-600">
       <Provider store={store}>
         <CountryCoordinates.Provider value={{ country, setCountry }}>
           <HotelDetailsId.Provider value={{ id, setId }}>
@@ -87,7 +87,7 @@ export const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard",
+        path: "/Dashboard",
         element: (
           <RequireAuth>
             <Suspense fallback={<div>Loading...</div>}>
