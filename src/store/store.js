@@ -6,6 +6,7 @@ import hotelDetailReducer from "./hotelDetailSlice";
 import hotelReviewReducer from "./hotelReviewSlice";
 import HotelRoomReducer from "./HotelRoomSlice";
 import WishlistReducer from "./wishListSlice";
+import checkoutReducer from "./checkoutSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     hotelReview: hotelReviewReducer,
     hotelRoom: HotelRoomReducer,
     wishList: WishlistReducer,
+    checkout: checkoutReducer,
   },
 });
 
