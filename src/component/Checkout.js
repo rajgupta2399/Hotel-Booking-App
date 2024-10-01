@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { addCheckoutDetails } from "../store/checkoutSlice";
+import toast from "react-hot-toast";
 
 // Define Yup schema for validation
 const schema = yup
@@ -55,13 +56,12 @@ const Checkout = () => {
         totalAmount: info?.offerRetailRate?.amount || "N/A",
       })
     );
+    toast.success("Pre-Booking Successfull");
     navigate("/MyBooking");
   };
 
   useEffect(() => {
     if (info) {
-      console.log(info);
-      console.log(hotelDetail);
     }
   }, [info, hotelDetail]);
 
