@@ -1,73 +1,36 @@
 import React, { useContext } from "react";
 import { CountryCoordinates } from "../context/ContextApi";
 import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
 
 const HotelCard = ({ item }) => {
-  const { country, setCountry } = useContext(CountryCoordinates);
-  const {
-    id,
-    city,
-    address,
-    name,
-    main_photo,
-    reviewCount,
-    rating,
-    stars,
-    zip,
-    latitude,
-    longitude,
-    currency,
-    thumbnail,
-    hotelDescription,
-  } = item;
+  const { country } = useContext(CountryCoordinates);
+  const { city, address, name, main_photo, rating, stars, zip } = item;
 
-  //   const country = useSelector((store) => store.country.CountryHotelCode);
   return (
-    <div>
-      <div>
-        <div className="mb-5 flex flex-wrap flex-row">
-          <div className="py-2 w-[390px] bg-[#14181B] cursor-pointer border-4 border-white rounded-md h-[455px]">
-            <div className="overflow-visible py-4 rounded-lg">
-              <img
-                alt={name}
-                className="px-4 h-[200px] rounded-lg object-cover"
-                src={
-                  main_photo
-                    ? main_photo
-                    : "https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D"
-                }
-                width="100%"
-              />
-            </div>
-            <div className="px-4 flex-col">
-              <p className="text-[20px] capitalize font-semibold text-ellipsis whitespace-nowrap overflow-hidden w-[250px] text-white pt-2">
-                {name}
-              </p>
-
-              <div className="flex flex-row gap-5">
-                <div className="flex flex-row ">
-                  <p className=" text-[15px] capitalize text-white font-semibold">
-                    {country.name}, {city}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[14px] capitalize font-semibold text-white">
-                    <Rating name="size-medium" defaultValue={stars} readOnly />
-                  </p>
-                </div>
-              </div>
-
-              <p className=" text-[15px] pb-1 text-ellipsis whitespace-nowrap overflow-hidden w-[240px] text-white">
-                {rating} Rating
-              </p>
-              <p className=" text-[15px] text-white font-semibold">
-                {address}
-                {"-"}
-                {zip}
-              </p>
-            </div>
+    <div className="flex justify-center mb-5">
+      <div className="py-4 bg-[#14181B] border border-gray-300 shadow-md rounded-md cursor-pointer h-auto w-full max-w-[300px] md:max-w-[350px] lg:max-w-[400px]">
+        <div className="overflow-hidden rounded-t-lg">
+          <img
+            alt={name}
+            className="w-full h-[200px] object-cover px-3 rounded-md"
+            src={
+              main_photo ||
+              "https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D"
+            }
+          />
+        </div>
+        <div className="px-4 py-3 text-white">
+          <h3 className="text-[18px] font-bold truncate">{name}</h3>
+          <p className="text-[14px] text-gray-300 mt-1">
+            {country.name}, {city}
+          </p>
+          <div className="flex items-center justify-between mt-2">
+            <Rating name="size-medium" defaultValue={stars} readOnly />
+            <p className="text-[14px] font-semibold">{rating} Rating</p>
           </div>
+          <p className="mt-1 text-gray-400 text-[14px] truncate">
+            {address}, {zip}
+          </p>
         </div>
       </div>
     </div>

@@ -1,79 +1,60 @@
-import React, { useContext, useEffect, useState } from "react";
-import { options } from "../utils/Constant";
-import useCountryCodeHotel from "../Hooks/useCountryCodeHotel";
+import React from "react";
 import { useSelector } from "react-redux";
-import { CountryCoordinates } from "../context/ContextApi";
-// Import Swiper styles
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import SkeletonContainer from "./SkeletonContainer";
 import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules";
-
-// import required modules
 import HotelCard from "./HotelCard";
-import Divider from "@mui/material/Divider";
-import HotelByCity from "./HotelByCity";
 
 export default function HotelSwiper() {
-  useCountryCodeHotel();
   const Country = useSelector((store) => store.country.CountryHotelCode);
 
   return (
-    <>
-      <div className="">
-        <div>
-          <Swiper
-            className=""
-            spaceBetween={50}
-            slidesPerView={3}
-            cssMode={true}
-            // pagination={true}
-            loop={true}
-            mousewheel={true}
-            keyboard={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[Autoplay, Navigation, Keyboard]}
-          >
-            {Country && Country.length > 0 ? (
-              Country.slice(0, 15).map((item, index) => (
-                <SwiperSlide key={index}>
-                  <div key={item.id || index} className=" shadow-md">
-                    <HotelCard item={item} key={index} />
-                  </div>
-                </SwiperSlide>
-              ))
-            ) : (
-              <div className=" flex flex-wrap gap-10 mb-6">
-                <SkeletonContainer />
-                <SkeletonContainer />
-                <SkeletonContainer />
-              </div>
-            )}
-          </Swiper>
-        </div>
-      </div>
-
-      {/**
-               
-      <div className="px-24">
+    <div className="w-full">
+      <Swiper
+        spaceBetween={20} // Adjust spacing between slides
+        slidesPerView={1} // Default to 1 slide for mobile (base case)
+        breakpoints={{
+          640: {
+            slidesPerView: 1, // Small screens (mobile), 1 slide per view
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 2, // Medium screens (tablets), 2 slides per view
+            spaceBetween: 15,
+          },
+          1024: {
+            slidesPerView: 3, // Large screens (desktop), 3 slides per view
+            spaceBetween: 20,
+          },
+        }}
+        loop={true}
+        mousewheel={true}
+        keyboard={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay, Navigation, Keyboard]}
+      >
         {Country && Country.length > 0 ? (
-          <div className="flex flex-wrap gap-5">
-            {Country.map((item, index) => (
-              <div key={item.id || index}>
+          Country.slice(0, 15).map((item, index) => (
+            <SwiperSlide key={index}>
+              <div key={item.id || index} className="shadow-md">
                 <HotelCard item={item} />
               </div>
-            ))}
-          </div>
+            </SwiperSlide>
+          ))
         ) : (
-          <p>No hotels available to display in the list.</p>
+          <div className="flex flex-wrap gap-10 mb-6">
+            <SkeletonContainer />
+            <SkeletonContainer />
+            <SkeletonContainer />
+          </div>
         )}
-      </div>
-      */}
-    </>
+      </Swiper>
+    </div>
   );
 }

@@ -30,7 +30,8 @@ import { Sidebar } from "primereact/sidebar";
 import CloseIcon from "@mui/icons-material/Close";
 import { HOTEL_BOOKING_LOGO, options } from "../utils/Constant";
 import { CountryCoordinates } from "../context/ContextApi";
-import Divider from "@mui/material/Divider";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,6 +41,7 @@ export default function Header() {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [searchText, setSearchText] = useState([]);
   const { country, setCountry } = useContext(CountryCoordinates);
+  const { currentUser, logout } = useAuth(); // Authentication context
 
   const styleCard = {
     fontFamily: "Poppins",
@@ -81,6 +83,20 @@ export default function Header() {
     });
     setVisible(false);
   };
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    setError("");
+
+    try {
+      await logout();
+      navigate("/login"); // Redirect to login page after logout
+    } catch {
+      setError("Failed to log out");
+    }
+  }
 
   return (
     <div>
@@ -145,7 +161,7 @@ export default function Header() {
 
       {/** Header */}
 
-      <header className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px] border-2 border-red-600">
+      <header className="bg-[#1D232A] font-Poppins w-full sm:px-10 md:px-10 lg:px-10 xl:px-24 2xl:px-32 shadow-xl text-white z-20 h-[80px]">
         <nav
           aria-label="Global"
           className="mx-auto flex w-full items-center justify-between p-6 lg:px-8 text-white "
@@ -271,17 +287,43 @@ export default function Header() {
                       style={styleCard}
                     >
                       <i class="fa-solid fa-bed px-2 no-underline"></i>
-                      MyBookings
+                      My Bookings
+                    </Link>
+
+                    <Link
+                      to="/Profile"
+                      className="text-md font-semibold leading-0 text-white hover:text-red-600 transition ease-in-out delay-100 cursor-pointer no-underline	"
+                      style={styleCard}
+                    >
+                      <i class="fa-solid fa-user  px-2 no-underline"></i>
+                      My Account
                     </Link>
                   </div>
                 </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
+                <div className="py-6 text-white">
+                  {currentUser ? (
+                    // If user is logged in, show email and logout option
+                    <div className="flex items-center space-x-4">
+                      <span className="text-base font-semibold ">
+                        Email: {currentUser.email}
+                      </span>
+                      <button
+                        onClick={handleLogout}
+                        className="block rounded-lg px-3 py-2.5 text-base font-semibold leading-7"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  ) : (
+                    // If user is not logged in, show login link
+                    <a
+                      href="#"
+                      onClick={() => navigate("/login")} // Redirect to login page
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7"
+                    >
+                      Log in
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

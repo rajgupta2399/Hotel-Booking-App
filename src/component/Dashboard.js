@@ -23,11 +23,11 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className=" bg-[#1D232A] px-28">
+      <div className=" bg-[#1D232A] px-10 sm:px-28 md:px-14 lg:px-16 xl:px-28 2xl:px-28">
         <div className=" mt-3">
-          <h5 className=" text-white font-semibold text-md py-3">
+          <h6 className=" text-white font-semibold text-md py-3">
             Here Are Some Top Rated Hotels In {country.name}
-          </h5>
+          </h6>
         </div>
         <HotelSwiper />
         <div className="">
