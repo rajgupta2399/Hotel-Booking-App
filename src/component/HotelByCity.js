@@ -7,83 +7,67 @@ import { useSelector } from "react-redux";
 import store from "../store/store";
 
 const HotelByCity = () => {
-  const Country = useSelector((store) => store.country.CountryHotelCode);
-
-  const { city, setCity } = useContext(CityCoordinates);
-  const { cityCode } = useCityHotel();
+  const { city, setCity } = useContext(CityCoordinates); // Assuming this is coming from context
+  const { cityCode } = useCityHotel(); // Assuming this hook fetches the city data
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCity, setFilteredCity] = useState([]);
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null); // New state to store selected city
 
-  const CityCode = cityCode;
-
-  // Handle search input change
   const handleSearchChange = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
-    const filtered = CityCode.filter((city) =>
+    const filtered = cityCode.filter((city) =>
       city.city.toLowerCase().includes(searchValue)
     );
     setFilteredCity(filtered);
   };
 
-  // Handle city selection
-  const handleCitySelect = (item) => {
-    setSearchTerm(item.city);
-    setFilteredCity([]);
-    setSelectedCity(item.city);
-    setCity(item);
+  const handleCitySelect = (city) => {
+    setSelectedCity(city.city); // Set the selected city
+    setFilteredCity([]); // Clear filtered cities
+    setCity(city); // Update the context with the selected city
   };
 
   return (
-    <>
-      <div className="mt-5">
-        <h6 className="text-lg capitalize font-semibold text-white text-center">
-          Search Your Hotel By entering the city name
-        </h6>
-        <div className="flex justify-center align-middle my-8 gap-5">
-          <div className="relative w-1/2">
-            <input
-              type="text"
-              placeholder="     Enter Your City To Book Hotels"
-              className="outline-none w-full focus:outline-none text-black block rounded-md h-[50px] text-center"
-              value={searchTerm}
-              onChange={handleSearchChange} // Update on input change
-            />
-
-            {/* City list dropdown below input */}
-            {filteredCity.length > 0 && (
-              <ul className="absolute z-10 w-full bg-[#1D232A] border border-gray-300 rounded-md max-h-60 overflow-y-auto scrollbar-hide">
-                {filteredCity.map((item, index) => (
-                  <div key={index}>
-                    <li
-                      key={index}
-                      className="p-2 cursor-pointer text-white"
-                      onClick={() => handleCitySelect(item)}
-                    >
-                      {item.city}
-                    </li>
-                    <Divider className="bg-white mb-2 mt-2" />
-                  </div>
-                ))}
-              </ul>
-            )}
-          </div>
+    <div className="mt-5">
+      <h6 className="text-lg capitalize font-semibold text-white text-center">
+        Search Your Hotel By City
+      </h6>
+      <div className="flex justify-center my-8">
+        <div className="relative w-full md:w-1/2">
+          <input
+            type="text"
+            placeholder="Enter Your City To Book Hotels"
+            className="outline-none w-full px-4 h-[50px] rounded-md text-center"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          {filteredCity.length > 0 && (
+            <ul className="absolute z-10 w-full bg-[#1D232A] border border-gray-300 rounded-md max-h-60 overflow-y-auto">
+              {filteredCity.map((item, index) => (
+                <li
+                  key={index}
+                  className="p-2 cursor-pointer text-white"
+                  onClick={() => handleCitySelect(item)}
+                >
+                  {item.city}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-
-        {/* Display selected city */}
-        {selectedCity && (
-          <div className="text-white text-center mt-4">
-            <h6 className="text-lg capitalize font-semibold text-white text-center mb-5">
-              Top Hotels Found in {selectedCity} City
-            </h6>
-          </div>
-        )}
       </div>
-
-      <HotelCityCard />
-    </>
+      {selectedCity && (
+        <div className="text-white text-center mt-4">
+          <h6 className="text-lg capitalize font-semibold text-white">
+            Top Hotels in {selectedCity}
+          </h6>
+        </div>
+      )}
+      <HotelCityCard />{" "}
+      {/* Assuming this will show the hotels based on selectedCity */}
+    </div>
   );
 };
 
