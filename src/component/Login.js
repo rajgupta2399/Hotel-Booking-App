@@ -29,10 +29,13 @@ export default function Login() {
   return (
     <>
       <div
-        className="d-flex align-items-center justify-content-center"
+        className="d-flex align-items-center justify-content-center text-white px-10"
         style={{ minHeight: "100vh" }}
       >
-        <div style={{ width: "40%", maxWidth: "600px" }}>
+        <div
+          className="w-100"
+          style={{ maxWidth: "600px", width: "90vw" }} // Adjust for mobile responsiveness
+        >
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4">Log In</h2>
@@ -56,7 +59,11 @@ export default function Login() {
                     className="mt-2"
                   />
                 </Form.Group>
-                <Button disabled={loading} className="w-100 mt-3 mb-2" type="submit">
+                <Button
+                  disabled={loading}
+                  className="w-100 mt-3 mb-2"
+                  type="submit"
+                >
                   Log In
                 </Button>
               </Form>

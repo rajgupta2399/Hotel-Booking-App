@@ -34,17 +34,20 @@ export default function Signup() {
   return (
     <>
       <div
-        className="d-flex align-items-center justify-content-center"
+        className="d-flex align-items-center justify-content-center text-white px-10"
         style={{ minHeight: "100vh" }}
       >
-        <div style={{ width: "40%", maxWidth: "600px" }}>
+        <div
+          className="w-100"
+          style={{ maxWidth: "600px", width: "90vw" }} // Adjusted for responsiveness
+        >
           <Card>
             <Card.Body>
               <h2 className="text-center mb-2">Sign Up</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
-                  <Form.Label className=" mt-2">Email</Form.Label>
+                  <Form.Label className="mt-2">Email</Form.Label>
                   <Form.Control
                     type="email"
                     ref={emailRef}
@@ -52,22 +55,26 @@ export default function Signup() {
                     className="mt-2"
                   />
                 </Form.Group>
-                <Form.Group id="password" className=" mt-2">
+                <Form.Group id="password" className="mt-2">
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
-                <Form.Group id="password-confirm" className=" mt-2">
-                  <Form.Label className=" mt-2">
+                <Form.Group id="password-confirm" className="mt-2">
+                  <Form.Label className="mt-2">
                     Password Confirmation
                   </Form.Label>
                   <Form.Control
                     type="password"
                     ref={passwordConfirmRef}
                     required
-                    className=" mb-3"
+                    className="mb-3"
                   />
                 </Form.Group>
-                <Button disabled={loading} className="w-100 mb-2 mt-2" type="submit">
+                <Button
+                  disabled={loading}
+                  className="w-100 mb-2 mt-2"
+                  type="submit"
+                >
                   Sign Up
                 </Button>
               </Form>

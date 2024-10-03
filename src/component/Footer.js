@@ -13,99 +13,66 @@ import { HOTEL_BOOKING_LOGO } from "../utils/Constant";
 const BottomFooter = () => {
   return (
     <div>
-      <Footer className=" bg-[#2A323C] shadow-custom">
+      <Footer className="bg-[#2A323C] shadow-custom">
         <div className="w-full">
-          <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4">
-            <div className=" px-24">
-              <Footer.Title
-                title="Company"
-                className=" flex justify-center align-middle"
-              />
+          <div className="grid w-full grid-cols-1 gap-8 px-6 py-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="px-8 lg:px-24">
+              <Footer.Title title="Company" className="flex justify-center" />
               <Footer.LinkGroup col>
-                <div className=" flex flex-col gap-3 ml-5">
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    About
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Careers
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Brand Center
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Blog
-                  </Link>
+                <div className="flex flex-col gap-3 ml-5">
+                  <Link className="text-white font-semibold">About</Link>
+                  <Link className="text-white font-semibold">Careers</Link>
+                  <Link className="text-white font-semibold">Brand Center</Link>
+                  <Link className="text-white font-semibold">Blog</Link>
                 </div>
               </Footer.LinkGroup>
             </div>
-            <div className="px-24">
+            <div className="px-8 lg:px-24">
               <Footer.Title
-                title="help center"
-                className=" flex justify-center align-middle"
+                title="Help Center"
+                className="flex justify-center"
               />
               <Footer.LinkGroup col>
-                <div className=" flex flex-col gap-3 ml-5">
-                  <Link className=" text-white font-semibold text-decoration-none">
+                <div className="flex flex-col gap-3 ml-5">
+                  <Link className="text-white font-semibold">
                     Discord Server
                   </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Twitter
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Facebook
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Contact Us
-                  </Link>
+                  <Link className="text-white font-semibold">Twitter</Link>
+                  <Link className="text-white font-semibold">Facebook</Link>
+                  <Link className="text-white font-semibold">Contact Us</Link>
                 </div>
               </Footer.LinkGroup>
             </div>
-            <div className=" px-24">
-              <Footer.Title
-                title="legal"
-                className=" flex justify-center align-middle"
-              />
+            <div className="px-8 lg:px-24">
+              <Footer.Title title="Legal" className="flex justify-center" />
               <Footer.LinkGroup col>
-                <div className=" flex flex-col gap-3 ml-5">
-                  <Link className=" text-white font-semibold text-decoration-none">
+                <div className="flex flex-col gap-3 ml-5">
+                  <Link className="text-white font-semibold">
                     Privacy Policy
                   </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Licensing
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Terms &amp; Conditions
+                  <Link className="text-white font-semibold">Licensing</Link>
+                  <Link className="text-white font-semibold">
+                    Terms & Conditions
                   </Link>
                 </div>
               </Footer.LinkGroup>
             </div>
-            <div className=" px-24">
-              <Footer.Title
-                title="download"
-                className=" flex justify-center align-middle"
-              />
+            <div className="px-8 lg:px-24">
+              <Footer.Title title="Download" className="flex justify-center" />
               <Footer.LinkGroup col>
-                <div className=" flex flex-col gap-3 ml-5">
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    iOS
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Android
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    Windows
-                  </Link>
-                  <Link className=" text-white font-semibold text-decoration-none">
-                    MacOS
-                  </Link>
+                <div className="flex flex-col gap-3 ml-5">
+                  <Link className="text-white font-semibold">iOS</Link>
+                  <Link className="text-white font-semibold">Android</Link>
+                  <Link className="text-white font-semibold">Windows</Link>
+                  <Link className="text-white font-semibold">MacOS</Link>
                 </div>
               </Footer.LinkGroup>
             </div>
           </div>
-          <div className="w-full bg-gray-700 px-24 py-6 sm:flex sm:items-center sm:justify-between">
-            <div className=" flex gap-3">
-              <p className=" py-1 text-white font-bold"> &copy; 2024</p>
-              <img src={HOTEL_BOOKING_LOGO} className=" h-9 w-auto" alt="" />
+          <div className="w-full bg-gray-700 px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex gap-3 items-center">
+              <p className="py-1 text-white font-bold">&copy; 2024</p>
+              <img src={HOTEL_BOOKING_LOGO} className="h-8 w-auto" alt="Logo" />
             </div>
             <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
               <Footer.Icon href="#" icon={BsFacebook} />

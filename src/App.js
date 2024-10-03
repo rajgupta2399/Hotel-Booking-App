@@ -32,7 +32,7 @@ function App() {
   const [city, setCity] = useState({ city: "Zürich" });
   const [id, setId] = useState({ id: "lp19c62" });
   return (
-    <div className="bg-[#1d232a] border-2 border-green-600">
+    <div className="bg-[#1d232a] border-2 border-green-600 w-[100%] h-[100%]">
       <Provider store={store}>
         <CountryCoordinates.Provider value={{ country, setCountry }}>
           <HotelDetailsId.Provider value={{ id, setId }}>
