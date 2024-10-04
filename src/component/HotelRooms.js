@@ -69,7 +69,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
   return (
     <>
       {hotelRoom && hotelRoom[0]?.roomTypes?.length > 0 ? ( // Added checks for hotelRoom
-        <div className="text-white px-24">
+        <div className="text-white px-2 sm:px-12 lg:px-24 mt-44 sm:mt-0  md:mt-2  lg:mt-0  xl:mt-0">
           {hotelDetail && hotelDetail.rooms.length > 0 ? (
             hotelDetail.rooms.map((item, index) => (
               <div
@@ -78,17 +78,17 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
               >
                 {/** Book Hotel Rooms */}
                 <div className="imageBox">
-                  <div className="images flex w-full">
-                    <div className="flex gap-2 flex-row border-2 px-4 py-3 my-2 mx-2 rounded-lg w-[70%]">
-                      <div className="w-[490px] rounded-lg">
+                  <div className="images flex flex-col lg:flex-row w-full gap-2">
+                    <div className="flex gap-2 flex-col lg:flex-row border-2 sm:border-2 md:border-2 lg:border-2 xl:border-2 px-4 py-3 my-2 mx-0 sm:mx-2 md:mx-2 lg:mx-2 xl:mx-2  rounded-lg w-full lg:w-[70%]">
+                      <div className="w-full lg:w-[490px] rounded-lg">
                         <img
                           src={item?.photos?.[0]?.url}
                           alt=""
-                          className="rounded-xl object-cover"
+                          className="rounded-xl object-cover w-full"
                         />
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <div className="w-[238px] rounded-lg h-[160px]">
+                      <div className="flex flex-col gap-2 w-full lg:w-auto">
+                        <div className="rounded-lg h-[160px]">
                           <img
                             src={
                               item?.photos?.[1]?.url
@@ -99,7 +99,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                             className="rounded-xl object-cover w-full h-full"
                           />
                         </div>
-                        <div className="relative w-[238px] h-[160px] rounded-lg">
+                        <div className="relative rounded-lg h-[160px]">
                           <img
                             src={
                               item?.photos?.[2]?.url
@@ -122,7 +122,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="w-[30%] border-2 py-3 my-2 mr-2 rounded-lg">
+                    <div className="w-full lg:w-[30%] border-2 py-3 my-2 mr-2 rounded-lg">
                       <div className="hotelDetails h-full">
                         <div className="hotelName">
                           <h6 className="text-[18px] text-center py-2 px-3">
@@ -157,7 +157,7 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                       </h6>
                     </div>
                     <div className="marquee-content">
-                      <ul className="text-white flex justify-between flex-wrap gap-3 px-7">
+                      <ul className="text-white flex justify-between flex-wrap gap-3 px-4 lg:px-7">
                         {item?.roomAmenities.slice(0, 30).map((amenity) => (
                           <li
                             key={amenity.amenitiesId}
@@ -173,9 +173,9 @@ const HotelRooms = ({ strongTagText, options, formattedDates }) => {
                 </div>
 
                 <div className="mt-3 mb-4">
-                  <div className="w-[100%] flex justify-center">
+                  <div className="w-full flex justify-center">
                     <button
-                      className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-[30%]"
+                      className="text-white bg-red-600 border-2 border-red-600 py-2 px-3 font-semibold rounded-md w-[80%] sm:w-[50%] lg:w-[30%]"
                       onClick={() => handleClick(item)}
                     >
                       Book Now

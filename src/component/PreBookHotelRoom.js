@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import PreBookHotelRoomCard from "./PreBookHotelRoomCard";
 
 const PreBookHotelRoom = () => {
@@ -28,14 +28,13 @@ const PreBookHotelRoom = () => {
     <div>
       {matchedRoom ? (
         // Show this block if a matching room is found
-        <div className="text-center my-5">
+        <div className="text-center my-5 px-2">
           <h5 className="text-white text-md pb-3 font-bold">
             Book Your {item?.roomName}
           </h5>
           {/* Display the first available photo */}
-
-          <div className="image w-full flex justify-center">
-            <div className=" w-[22%] border-2 py-3 rounded-lg">
+          <div className="image w-full flex justify-center px-2">
+            <div className="w-full md:w-[50%] lg:w-[22%] border-2 py-3 rounded-lg">
               {item?.photos?.[0]?.url ||
               item?.photos?.[1]?.url ||
               item?.photos?.[2]?.url ? (
@@ -46,8 +45,7 @@ const PreBookHotelRoom = () => {
                     item?.photos?.[2]?.url
                   }
                   alt="Hotel Room"
-                  className="mx-auto w-[300px] h-[250px] object-cover rounded-lg"
-                  style={{ maxWidth: "300px" }}
+                  className="mx-auto w-[90%] h-[200px] md:h-[250px] object-cover rounded-lg"
                 />
               ) : null}
             </div>
@@ -64,7 +62,7 @@ const PreBookHotelRoom = () => {
 
       <div className="hotelRoomsdiv">
         {hotelRoom && hotelRoom[0]?.roomTypes.length > 0 ? (
-          <div className="rooms px-28 flex flex-wrap flex-row gap-5 mb-5">
+          <div className="rooms px-5 sm:px-10 md:px-20 lg:px-28 flex flex-wrap gap-5 justify-center mb-5">
             {/* Use a Set to track unique room names */}
             {Array.from(
               new Set(
@@ -82,7 +80,10 @@ const PreBookHotelRoom = () => {
                   roomType.rates[0]?.name?.toLowerCase() === uniqueRoomName
               );
               return (
-                <div key={filteredRoom.roomTypeId} className="">
+                <div
+                  key={filteredRoom.roomTypeId}
+                  className="w-full sm:w-[45%] md:w-[30%] lg:w-[22%]"
+                >
                   <PreBookHotelRoomCard
                     filteredRoom={filteredRoom}
                     item={item}

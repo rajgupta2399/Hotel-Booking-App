@@ -7,6 +7,7 @@ import hotelReviewReducer from "./hotelReviewSlice";
 import HotelRoomReducer from "./HotelRoomSlice";
 import WishlistReducer from "./wishListSlice";
 import checkoutReducer from "./checkoutSlice";
+import userProfileReducer from "./userProfileSlice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     hotelRoom: HotelRoomReducer,
     wishList: WishlistReducer,
     checkout: checkoutReducer,
+    profile: userProfileReducer,
   },
 });
 
