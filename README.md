@@ -10,9 +10,16 @@ A hotel booking platform built using React.js, Tailwind CSS, Chakra UI, Redux, C
 - 📝 **View booking history** for past reservations
 - 🔐 **Firebase authentication** for secure login
 - ⚛️ **State management** using Redux and Context API
-- **Tech Stack using** : `React.js, Redux Toolkit, TailwindCSS, Firebase, Chakra UI, Tailwind UI`.
 
 - [🚀 _Live Project App Link_ 😍](https://makemytripbyrk.netlify.app/)
+
+## 🛠 Technologies Used
+
+- **React.js** - UI library
+- **Redux & Context API** - State management
+- **Tailwind CSS & Chakra UI** - Styling and UI components
+- **Firebase** - Authentication
+- **React Router DOM** - Navigation
 
 ## 🔥 Clone this Repository
 
