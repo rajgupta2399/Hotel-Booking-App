@@ -1,4 +1,4 @@
-# ❤️ World Hotel Booking React.js Projects 🚀
+# ❤️ World Hotel Booking App 🚀
 
 A hotel booking platform built using React.js, Tailwind CSS, Chakra UI, Redux, Context API, and Firebase for authentication. This app allows users to:
 
