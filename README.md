@@ -9,3 +9,30 @@ A hotel booking platform built using React.js, Tailwind CSS, Chakra UI, Redux, C
 - Tech Stack used: `React.js, Redux Toolkit, TailwindCSS, Firebase, Chakra UI, Tailwind UI`.
 
 - [🚀 _Live Project App Link_ 😍](https://makemytripbyrk.netlify.app/)
+
+## 🔥 Clone this Repository
+
+You need to write the following commands on the terminal screen (in vscode) so that you can run this project locally.
+
+```bash
+  git clone "https://github.com/rajgupta2399/Hotel-Booking-App.git"
+```
+
+Go to the project directory
+
+```bash
+  cd Hotel-Booking-App
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
